@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://planet-ota.planetcom.co.uk/schemas/codi_bootloader_manifest.json",
+  "title": "CoDi bootloader asset manifest",
+  "description": "Manifest included with the CoDi bootloader (varies)",
+  "type": "object",
+  "properties": {
+
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "bootloaderVersion": {
+          "type": "string"
+        },
+        "bootloaderChecksum": {
+          "type": "string"
+        },
+        "bootloaderVendor": {
+          "type": "string",
+          "enum": [
+            "PLANET",
+            "CODI_OS"
+          ]
+        }
+      },
+      "required": [
+        "bootloaderVersion",
+        "bootloaderChecksum",
+        "bootloaderVendor"
+      ]
+    }
+  },
+  "required": [
+    "metadata"
+  ]
+}

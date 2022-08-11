@@ -1,0 +1,23 @@
+version: "3"
+volumes:
+  postgresql_ota_data:
+services:
+  postgresql_ota:
+    image: "postgres:alpine"
+    hostname: "postgres_ota"
+    container_name: "postgres_ota"
+    ports:
+      - "5432:5432"
+    volumes:
+      - "postgresql_ota_data:/var/lib/postgresql/data"
+    environment:
+      - "POSTGRES_USER=planet_ota_service"
+      - "POSTGRES_PASSWORD=password123"
+      - "POSTGRES_DB=planet_ota_service"
+  planet_ota_service:
+    build: "."
+    hostname: "planet_ota_service"
+    container_name: "planet_ota_service"
+    ports:
+      - "8080:8080"
+
