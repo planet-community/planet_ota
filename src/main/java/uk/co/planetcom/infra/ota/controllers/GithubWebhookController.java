@@ -14,7 +14,6 @@ import java.security.MessageDigest;
 @RequestMapping("/webhooks/github")
 public class GithubWebhookController {
     public final int SIG_LEN = 45;
-    private final char EOL = '\n';
 
     @Value("${github.webhooks.secrets.codid}")
     private String GITHUB_CODID_WEBHOOK_SECRET;
@@ -24,14 +23,14 @@ public class GithubWebhookController {
     public ResponseEntity<String> codidWebhook(@RequestHeader("X-Hub-Signature") String sig,
                                                @RequestBody String payload) {
         if (null == sig || sig.isEmpty()) {
-            return new ResponseEntity<>("No signature provided." + EOL, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("No signature provided.\n", HttpStatus.BAD_REQUEST);
         }
         try {
             String computedHash = String.format("sha1=%s", new HmacUtils(HmacAlgorithms.HMAC_SHA_1,
                     GITHUB_CODID_WEBHOOK_SECRET.getBytes()).hmacHex(payload.getBytes()));
 
             if (sig.length() != SIG_LEN || MessageDigest.isEqual(sig.getBytes(), computedHash.getBytes())) {
-                return new ResponseEntity<>("Invalid signature." + EOL, HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>("Invalid signature.\n", HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

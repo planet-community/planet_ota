@@ -7,7 +7,7 @@ RUN mvn -f /home/app/pom.xml -DskipTests=true clean package
 
 FROM docker.io/amazoncorretto:11-alpine3.14 AS app
 
-ENV 0.1.0-SNAPSHOT
+ENV VERSION=0.1.0-SNAPSHOT
 COPY --from=builder /home/app/target/planet-ota-$VERSION.war /usr/local/lib/app.jar
 
 EXPOSE 8080
