@@ -1,2 +1,2 @@
-Planet OTA Service Appliaction
-================================
+Planet OTA Service Server
+=========================
