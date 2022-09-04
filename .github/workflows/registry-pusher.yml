@@ -1,0 +1,27 @@
+name: planet_ota_service CI Docker image builder
+'on':
+  - push
+jobs:
+  build-ota-service-container-image:
+    name: Build and push container image to GHCR for the Planet OTA Service
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+
+      - name: Build images
+        id: build
+        uses: redhat-actions/buildah-build@v2
+        with:
+          image: shymega/planet_ota_service
+          tags: latest
+          containerfiles: Dockerfile
+
+      - name: Push container
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build.outputs.image }}
+          tags: ${{ steps.build.outputs.tags }}
+          registry: ghcr.io
+          username: shymega
+          password: ${{ secrets.GITHUB_TOKEN }}
