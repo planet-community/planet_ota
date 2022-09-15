@@ -1,9 +1,15 @@
 name: planet_ota_service CI Docker image builder
-'on':
-  - push
+
+on:
+  workflow_run:
+    workflows: ["CI workflow"]
+    types: [completed]
+    branches: [main]
+
 jobs:
   build-ota-service-container-image:
-    name: Build and push container image to GHCR for the Planet OTA Service
+    name: Build and push container image to GHCR & Docker Hub for the Planet OTA Service
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -17,7 +23,7 @@ jobs:
           tags: latest
           containerfiles: Dockerfile
 
-      - name: Push container
+      - name: Push container to GHCR.io
         uses: redhat-actions/push-to-registry@v2
         with:
           image: ${{ steps.build.outputs.image }}
@@ -25,3 +31,12 @@ jobs:
           registry: ghcr.io
           username: shymega
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push container to docker.io
+        uses: redhat-actions/push-to-registry@v2
+        with:
+          image: ${{ steps.build.outputs.image }}
+          tags: ${{ steps.build.outputs.tags }}
+          registry: docker.io
+          username: shymega
+          password: ${{ secrets.DOCKER_TOKEN }}
