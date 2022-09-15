@@ -18,7 +18,7 @@ public class GithubWebhookController {
     @Value("${github.webhooks.secrets.codid}")
     private String GITHUB_CODID_WEBHOOK_SECRET;
 
-    @RequestMapping(value = "/codid", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(value = "/codid", produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> codidWebhook(@RequestHeader("X-Hub-Signature") String sig,
                                                @RequestBody String payload) {
