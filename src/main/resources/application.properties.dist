@@ -1,0 +1,6 @@
+spring.datasource.url=jdbc:postgresql://postgres_ota:5432/planet_ota_service
+spring.datasource.username=planet_ota
+spring.datasource.password=enter-password-here
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=update
+github.webhooks.secrets.codid=enter-secret-here
