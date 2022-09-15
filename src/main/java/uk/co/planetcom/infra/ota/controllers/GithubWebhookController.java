@@ -13,7 +13,7 @@ import java.security.MessageDigest;
 @RestController
 @RequestMapping("/webhooks/github")
 public class GithubWebhookController {
-    public final int SIG_LEN = 45;
+    private final int SIG_LEN = 45;
 
     @Value("${github.webhooks.secrets.codid}")
     private String GITHUB_CODID_WEBHOOK_SECRET;
