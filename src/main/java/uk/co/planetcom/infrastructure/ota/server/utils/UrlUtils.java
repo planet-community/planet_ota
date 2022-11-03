@@ -1,4 +1,4 @@
-package uk.co.planetcom.infra.ota.utils;
+package uk.co.planetcom.infrastructure.ota.server.utils;
 
 import java.net.MalformedURLException;
 import java.net.URL;
