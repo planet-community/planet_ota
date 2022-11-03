@@ -1,15 +1,16 @@
-FROM docker.io/maven:3.8.6-amazoncorretto-11 AS builder
+FROM ghcr.io/graalvm/native-image:ol7-java17 AS builder
 
 COPY src /home/app/src
 COPY pom.xml /home/app
+COPY mvnw /home/app
+COPY .mvn /home/app/.mvn/
+WORKDIR /home/app
 
-RUN mvn -f /home/app/pom.xml -DskipTests=true clean package
+RUN ./mvnw -f /home/app/pom.xml -DskipTests=true -Pnative clean package
 
 FROM docker.io/amazoncorretto:11-alpine3.14 AS app
 
-ENV VERSION=0.1.0-SNAPSHOT
-COPY --from=builder /home/app/target/planet-ota-$VERSION.war /usr/local/lib/app.jar
+WORKDIR /app
+COPY --from=builder /home/app/target/planet-ota /app/planet-ota
 
-EXPOSE 8080
-
-ENTRYPOINT ["java","-jar","/usr/local/lib/app.jar"]
+ENTRYPOINT ["/app/planet-ota"]
