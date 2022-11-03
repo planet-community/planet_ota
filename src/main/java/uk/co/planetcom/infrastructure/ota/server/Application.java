@@ -1,12 +1,11 @@
-package uk.co.planetcom.infra.ota;
+package uk.co.planetcom.infrastructure.ota.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
 @SpringBootApplication
-public class PlanetOtaServerApplication {
+public class Application {
     public static void main(String[] args) {
-        SpringApplication.run(PlanetOtaServerApplication.class, args);
+        SpringApplication.run(Application.class, args);
     }
 }

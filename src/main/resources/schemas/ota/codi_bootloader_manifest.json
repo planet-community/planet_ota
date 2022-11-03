@@ -5,7 +5,6 @@
   "description": "Manifest included with the CoDi bootloader (varies)",
   "type": "object",
   "properties": {
-
     "metadata": {
       "type": "object",
       "properties": {

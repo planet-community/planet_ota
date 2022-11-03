@@ -1,10 +1,10 @@
-package uk.co.planetcom.infra.ota;
+package uk.co.planetcom.infrastructure.ota.server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PlanetOtaServerApplicationTests {
+class ApplicationTests {
 
     @Test
     void contextLoads() {

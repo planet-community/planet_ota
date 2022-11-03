@@ -1,4 +1,4 @@
-package uk.co.planetcom.infra.ota.controllers;
+package uk.co.planetcom.infrastructure.ota.server.controllers;
 
 import org.apache.commons.codec.digest.HmacAlgorithms;
 import org.apache.commons.codec.digest.HmacUtils;
@@ -18,8 +18,8 @@ public class GithubWebhookController {
     @Value("${github.webhooks.secrets.codid}")
     private String GITHUB_CODID_WEBHOOK_SECRET;
 
-    @PostMapping(value = "/codid", produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/codid", produces = MediaType.APPLICATION_JSON_VALUE, consumes =
+            MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> codidWebhook(@RequestHeader("X-Hub-Signature") String sig,
                                                @RequestBody String payload) {
         if (null == sig || sig.isEmpty()) {
