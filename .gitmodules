@@ -1,0 +1,3 @@
+[submodule "src/main/resources/schemas/ota"]
+	path = src/main/resources/schemas/ota
+	url = git@github.com:shymega/planet_ota_service_schemas.json.git
