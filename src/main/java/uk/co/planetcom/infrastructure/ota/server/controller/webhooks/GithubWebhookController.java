@@ -1,4 +1,4 @@
-package uk.co.planetcom.infrastructure.ota.server.controllers;
+package uk.co.planetcom.infrastructure.ota.server.controller.webhooks;
 
 import org.apache.commons.codec.digest.HmacAlgorithms;
 import org.apache.commons.codec.digest.HmacUtils;
