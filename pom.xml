@@ -200,7 +200,7 @@
                         </goals>
                         <configuration>
                             <sourceDirectory>${project.basedir}/src/main/resources/schemas/ota</sourceDirectory>
-                            <targetPackage>uk.co.planetcom.infrastructure.ota.ext.schemas.model</targetPackage>
+			    <targetPackage>uk.co.planetcom.infrastructure.ota.ext.schemas.models</targetPackage>
                             <includeGetters>true</includeGetters>
                             <includeSetters>true</includeSetters>
                         </configuration>
