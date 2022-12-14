@@ -12,18 +12,6 @@ services:
       - "POSTGRES_USER=planet_ota_service"
       - "POSTGRES_PASSWORD=password123"
       - "POSTGRES_DB=planet_ota_service"
-  ironauth:
-    image: "docker.io/iron/auth"
-    container_name: "ironauth"
-    hostname: "ironauth"
-  ironmq:
-    image: "docker.io/iron/mq"
-    container_name: "ironmq"
-    hostname: "ironmq"
-    environment:
-      - "AUTH_HOST=http://ironauth:8090"
-    ports:
-      - "8070:8080"
   planet_ota_service:
     build: "."
     hostname: "planet_ota_service"
