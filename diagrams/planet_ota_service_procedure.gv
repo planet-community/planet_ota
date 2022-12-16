@@ -16,7 +16,7 @@ digraph PlanetOtaUpdateEventLoop {
     device_in_loop [label = "Device now in wait loop."];
     device_receive_notify [label = "PC device receives notification"];
     device_wait_backoff [label = "PC device waits 15-45 minutes, backoff"];
-    device_sends_meta [label = "PC device sends unique hashed ID to OTA service, and checks `lastUpdated` key"];
+    device_sends_meta [label = "PC device sends unique hashed ID to OTA service (if generated), and checks `lastUpdated` key"];
     device_process_listing [label = "Device processes `lastUpdated` key, and quits if no update"]
     
     device_enter->device_wait->ota_service->device_in_loop->ota_notify;
