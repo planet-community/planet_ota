@@ -24,7 +24,7 @@ jobs:
           containerfiles: Dockerfile
 
       - name: Push container to GHCR.io
-        uses: redhat-actions/push-to-registry@v2.6
+        uses: redhat-actions/push-to-registry@v2.7
         with:
           image: ${{ steps.build.outputs.image }}
           tags: ${{ steps.build.outputs.tags }}
