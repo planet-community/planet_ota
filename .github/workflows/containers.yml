@@ -17,7 +17,7 @@ jobs:
 
       - name: Build images
         id: build
-        uses: redhat-actions/buildah-build@v2.10
+        uses: redhat-actions/buildah-build@v2.11
         with:
           image: ${{ github.repository }}
           tags: sha-${{ github.sha }}
