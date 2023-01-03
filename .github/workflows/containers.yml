@@ -20,7 +20,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2.11
         with:
           image: ${{ github.repository }}
-          tags: sha-${{ github.sha }}
+          tags: ${{ contains(github.ref_name, 'main') && 'latest' || github.ref_name }}-planet-ota-serverr
           containerfiles: Dockerfile
 
       - name: Push container to GHCR.io
