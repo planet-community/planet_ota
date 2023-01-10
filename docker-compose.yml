@@ -14,8 +14,8 @@ services:
       - "POSTGRES_DB=planet_ota_service"
   planet_ota_service:
     build: "."
+    image: "ghcr.io/shymega/planet_ota_server:latest-planet-ota-server"
     hostname: "planet_ota_service"
     container_name: "planet_ota_service"
     ports:
       - "8080:8080"
-
