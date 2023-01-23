@@ -1,10 +1,9 @@
 FROM docker.io/maven:3.8-eclipse-temurin-17 AS build
 
 WORKDIR /home/app
-COPY src /home/app/src
-COPY pom.xml /home/app
+COPY . ./
 
-RUN mvn -DskipTests clean package
+RUN ./mvnw -DskipTests clean package
 
 FROM docker.io/eclipse-temurin:17-jre AS app
 
