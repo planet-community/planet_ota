@@ -1,3 +1,3 @@
 [submodule "src/main/resources/schemas/ota"]
 	path = src/main/resources/schemas/ota
-	url = https://github.com/shymega/Agnostos_schemas.json
+	url = https://github.com/shymega/Agnostos_schemas.json.git
