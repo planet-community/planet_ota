@@ -9,6 +9,6 @@ FROM docker.io/eclipse-temurin:17-jre AS app
 
 ARG OTA_VERSION=0.1.0
 WORKDIR /home/app
-COPY --from=build /home/app/target/planet-ota-$OTA_VERSION.war /home/app/planet-ota.war
+COPY --from=build /home/app/target/agnostos-$OTA_VERSION.war /home/app/agnostos.war
 
-ENTRYPOINT ["java", "-jar", "/home/app/planet-ota.war"]
+ENTRYPOINT ["java", "-jar", "/home/app/agnostos.war"]
