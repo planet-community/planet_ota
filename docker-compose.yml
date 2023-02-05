@@ -1,21 +1,21 @@
 version: "3"
 volumes:
-  postgresql_planet_ota_data:
+  postgresql_agnostos_data:
 services:
-  postgresql_planet_ota:
+  postgresql_agnostos:
     image: "docker.io/postgres:alpine"
-    hostname: "postgres_planet_ota"
-    container_name: "postgres_planeta_ota"
+    hostname: "postgres_agnostos"
+    container_name: "postgres_planet_ota"
     volumes:
-      - "postgresql_planet_ota_data:/var/lib/postgresql/data"
+      - "postgresql_agnostos_data:/var/lib/postgresql/data"
     environment:
-      - "POSTGRES_USER=planet_ota_service"
+      - "POSTGRES_USER=agnostos"
       - "POSTGRES_PASSWORD=password123"
-      - "POSTGRES_DB=planet_ota_service"
-  planet_ota_service:
+      - "POSTGRES_DB=agnostos"
+  agnostos:
     build: "."
-    image: "ghcr.io/shymega/planet_ota_server:latest-planet-ota-server"
-    hostname: "planet_ota_service"
-    container_name: "planet_ota_service"
+    image: "ghcr.io/shymega/agnostos:latest"
+    hostname: "agnostos"
+    container_name: "agnostos"
     ports:
       - "8080:8080"
