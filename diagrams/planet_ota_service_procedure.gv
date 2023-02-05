@@ -3,26 +3,26 @@ digraph PlanetOtaUpdateEventLoop {
     node [shape=box, style=rounded];
 
     vendor_push [label = "Vendor pushes asset to OTA service"];
-    ota_check_before_process [label = "OTA service checks asset checksums and checks for duplicates."];
+    ota_check_before_process [label = "OTA service checks asset checksums for duplicates"];
     ota_process [label = "OTA service uploads asset to S3, and adds to DB"];
-    ota_notify [label = "OTA service pushes notification to subscribed devices over STOMP via WebSockets."]
+    ota_notify [label = "OTA service pushes notification to subscribed devices over SQS/STOMP"]
     ota_service [label = "OTA service"];
 
     vendor_push->ota_check_before_process->ota_process->ota_service;
     ota_service->ota_notify;
 
-    device_enter [label = "PC device subscribes to STOMP queue"];
+    device_enter [label = "PC device subscribes to queue"];
     device_wait [label = "Device waiting for notification"]
     device_in_loop [label = "Device now in wait loop."];
     device_receive_notify [label = "PC device receives notification"];
     device_wait_backoff [label = "PC device waits 15-45 minutes, backoff"];
-    device_sends_meta [label = "PC device sends unique hashed ID to OTA service (if generated), and checks `lastUpdated` key"];
+    device_sends_id [label = "PC device sends unique, hashed device ID to OTA service"];
     device_process_listing [label = "Device processes `lastUpdated` key, and quits if no update"]
     
     device_enter->device_wait->ota_service->device_in_loop->ota_notify;
     ota_notify->device_receive_notify;
-    device_receive_notify->device_wait_backoff->device_sends_meta->device_process_listing;
-    
+    device_receive_notify->device_wait_backoff->device_sends_id->device_process_listing;
+   
     device_notifies_user [label = "Device notifies user of new update"];
     device_dl_from_s3 [label = "Device downloads asset from S3"];
     device_checks_checksum [label = "Device checks asset manifest and checksum"];
