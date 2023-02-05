@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build-ota-service-container-image:
+  build-agnostos-container-image:
     name: Build and push container image to GHCR
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
