@@ -10,7 +10,7 @@
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>uk.co.planetcom.infra</groupId>
-    <artifactId>planet-ota</artifactId>
+    <artifactId>agnostos</artifactId>
     <version>0.1.0</version>
     <packaging>war</packaging>
     <name>Planet software assets and firmware OTA hub</name>
