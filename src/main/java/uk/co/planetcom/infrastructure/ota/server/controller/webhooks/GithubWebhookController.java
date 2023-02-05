@@ -26,16 +26,7 @@ public class GithubWebhookController {
             @RequestBody String payload) {
         log.info("GitHub webhook: Received new webhook request.");
         try {
-            if (null == sig || sig.isEmpty()) {
-                log.warn("No signature provided, return 400.");
-                return new ResponseEntity<>("No signature provided.\n", HttpStatus.BAD_REQUEST);
-            }
-        } catch (NullPointerException e) {
-            log.warn("Null pointer encountered, this could merely be an empty signature. Return 400.");
-            return new ResponseEntity<>("No signature provided.\n", HttpStatus.BAD_REQUEST);
-        }
-        try {
-            log.debug("Computing GitHub SHA-1 hash..");
+            log.info("Computing GitHub SHA-1 hash..");
             String computedHash = String.format("sha1=%s", new HmacUtils(HmacAlgorithms.HMAC_SHA_1,
                     GITHUB_CODID_WEBHOOK_SECRET.getBytes()).hmacHex(payload.getBytes()));
 
