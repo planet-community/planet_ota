@@ -17,7 +17,7 @@ jobs:
 
       - name: Build images
         id: build
-        uses: redhat-actions/buildah-build@v2.11
+        uses: redhat-actions/buildah-build@v2.12
         with:
           image: ${{ github.repository }}
           tags: ${{ contains(github.ref_name, 'main') && 'latest' || github.ref_name }}
