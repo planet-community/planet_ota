@@ -3,8 +3,7 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 		"args": {
-			// Update the VARIANT arg to pick a Java version: 8, 11, 15
-			"VARIANT": "11"
+			"VARIANT": "17"
 		}
 	},
 	"settings": {
@@ -16,9 +15,7 @@
 		"java.checkstyle.configuration": "/google_checks.xml",
 		"editor.tabSize": 2,
 		"java.format.comments.enabled": false,
-		// VSCode messes up license headers
 		"editor.formatOnSave": false,
-		// Allign with eclipse and Google style
 		"java.completion.importOrder": [
 			"com",
 			"java",
@@ -26,7 +23,6 @@
 			"org"
 		]
 	},
-	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"vscjava.vscode-java-pack",
 		"DavidAnson.vscode-markdownlint",
@@ -37,12 +33,9 @@
 		"vscjava.vscode-spring-boot-dashboard",
 		"GabrielBB.vscode-lombok"
 	],
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
 		8080
 	],
-	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "java -version",
-	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"remoteUser": "vscode"
 }
