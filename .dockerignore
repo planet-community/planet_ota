@@ -1,0 +1,8 @@
+/target
+/diagrams
+/docker-compose.yml
+/README.md
+/LICENSE
+/Dockerfile
+/.github
+/.devcontainer
