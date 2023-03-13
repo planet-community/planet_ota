@@ -1,6 +1,5 @@
 package uk.co.planetcom.infrastructure.ota.server.db.entity;
 
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +21,4 @@ public class Asset {
     private ZonedDateTime uploadTimeStamp;
     @Convert(converter = AssetTypeConverter.class)
     private AvailableAsset.AssetType assetType;
-
-
 }
