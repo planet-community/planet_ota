@@ -9,9 +9,9 @@ services:
     volumes:
       - "postgresql_agnostos_data:/var/lib/postgresql/data"
     environment:
-      - "POSTGRES_USER=agnostos"
-      - "POSTGRES_PASSWORD=password123"
-      - "POSTGRES_DB=agnostos"
+      - "POSTGRES_USER=${DB_USER:-agnostos}"
+      - "POSTGRES_PASSWORD=${DB_PASSWORD:-password123}"
+      - "POSTGRES_DB=${DB_NAME:-agnostos}"
   agnostos:
     build: "."
     image: "ghcr.io/shymega/agnostos:latest"
