@@ -4,10 +4,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
 
-import lombok.extern.slf4j.Slf4j;
-
 public class UrlUtils {
-    private UrlUtils() {}
+    private UrlUtils() {
+    }
 
     public static String getUrlFileName(String url) throws MalformedURLException {
         try {
