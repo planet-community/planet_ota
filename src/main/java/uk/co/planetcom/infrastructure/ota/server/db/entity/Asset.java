@@ -11,8 +11,12 @@ import uk.co.planetcom.infrastructure.ota.server.db.entity.converter.AssetTypeCo
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
-@Data @AllArgsConstructor @NoArgsConstructor @ToString
-@Entity @Table(name = "assets")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Entity
+@Table(name = "assets")
 public class Asset {
     @Id
     @GeneratedValue
