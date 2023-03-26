@@ -5,4 +5,5 @@ import uk.co.planetcom.infrastructure.ota.server.db.entity.Asset;
 
 import java.util.UUID;
 
-public interface AssetsRepository extends JpaRepository<Asset, UUID> {}
+public interface AssetsRepository extends JpaRepository<Asset, UUID> {
+}
