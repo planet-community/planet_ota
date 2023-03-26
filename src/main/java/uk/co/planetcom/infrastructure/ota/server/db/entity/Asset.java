@@ -25,4 +25,6 @@ public class Asset {
     private ZonedDateTime uploadTimeStamp;
     @Convert(converter = AssetTypeConverter.class)
     private AvailableAsset.AssetType assetType;
+    private boolean assetSuppressed;
+
 }
