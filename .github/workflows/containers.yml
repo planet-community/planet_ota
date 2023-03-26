@@ -2,7 +2,7 @@ name: CI container image builder
 
 on:
   workflow_run:
-    workflows: ["CI workflow"]
+    workflows: ["CodeQL workflow"]
     types: [completed]
     branches: [main]
 
