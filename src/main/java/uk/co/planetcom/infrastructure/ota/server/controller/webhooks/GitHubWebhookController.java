@@ -16,7 +16,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/webhooks/github")
-public class GithubWebhookController {
+public class GitHubWebhookController {
     private final int SIG_LEN = 45;
 
     @Value("${github.webhooks.secrets.codid}")
