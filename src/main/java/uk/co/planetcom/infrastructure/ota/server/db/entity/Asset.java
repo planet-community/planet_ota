@@ -27,4 +27,8 @@ public class Asset {
     private AvailableAsset.AssetType assetType;
     private boolean assetSuppressed;
 
+    public boolean isAvailable() {
+        return this.releaseTimeStamp.isAfter(ZonedDateTime.now())
+                && !this.assetSuppressed;
+    }
 }
