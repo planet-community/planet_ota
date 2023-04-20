@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import uk.co.planetcom.infrastructure.ota.server.db.entities.enums.AssetType;
 import uk.co.planetcom.infrastructure.ota.server.db.entities.enums.AssetVendor;
 import uk.co.planetcom.infrastructure.ota.server.db.entities.enums.converters.AssetTypeConverter;
@@ -18,6 +19,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
+@Slf4j
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -87,8 +89,8 @@ public class Asset implements Serializable {
     @Transient
     @JsonIgnore
     public boolean isAvailable() {
-        return ((this.releaseTimeStamp.isAfter(ZonedDateTime.now(ZoneId.of("Europe/London")))
-                || this.releaseTimeStamp.isEqual(ZonedDateTime.now(ZoneId.of("Europe/London"))))
+
+        return (this.releaseTimeStamp.isAfter(ZonedDateTime.now(ZoneId.systemDefault()))
                 && !this.assetSuppressed);
     }
 
