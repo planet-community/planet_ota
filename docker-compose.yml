@@ -19,6 +19,8 @@ services:
     hostname: "agnostos"
     container_name: "agnostos"
     restart: on-failure
+    environment:
+      TZ: "Europe/London"
     depends_on:
       - postgresql_agnostos
     ports:
