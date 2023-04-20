@@ -14,13 +14,16 @@ services:
       - "POSTGRES_PASSWORD=${DB_PASSWORD:-password123}"
       - "POSTGRES_DB=${DB_NAME:-agnostos_db}"
   agnostos:
-    build: "."
+    build:
+      context: .
+      args:
+        TZ: "${TZ:-Europe/London}"
     image: "ghcr.io/shymega/agnostos:latest"
     hostname: "agnostos"
     container_name: "agnostos"
     restart: on-failure
     environment:
-      TZ: "Europe/London"
+      TZ: "${TZ:-Europe/London}"
     depends_on:
       - postgresql_agnostos
     ports:
