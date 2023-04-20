@@ -47,8 +47,8 @@ public class AssetController {
     }
 
     @GetMapping("/by/vendor/{vendor}")
-    public Collection<Asset> findAssetByVendor(@PathVariable AssetVendor assetVendor) {
-        return repository.findAllByAssetVendor(assetVendor)
+    public Collection<Asset> findAssetByVendor(@PathVariable AssetVendor vendor) {
+        return repository.findAllByAssetVendor(vendor)
                 .stream()
                 .filter(Asset::isAvailable)
                 .toList();
