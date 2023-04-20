@@ -24,7 +24,7 @@ public class AssetController {
     public Asset findByUuid(@PathVariable UUID uuid) {
         return repository.findById(uuid)
                 .stream()
-                .filter(asset -> !asset.isAvailable())
+                .filter(Asset::isAvailable)
                 .findFirst()
                 .orElseThrow();
     }
@@ -33,7 +33,7 @@ public class AssetController {
     public Collection<Asset> findAssetByAssetType(@PathVariable AssetType assetType) {
         return repository.findAllByAssetType(assetType)
                 .stream()
-                .filter(asset -> !asset.isAvailable())
+                .filter(Asset::isAvailable)
                 .toList();
     }
 
@@ -41,7 +41,15 @@ public class AssetController {
     public Collection<Asset> findAssets() {
         return repository.findAll()
                 .stream()
-                .filter(asset -> !asset.isAvailable())
+                .filter(Asset::isAvailable)
+                .toList();
+    }
+
+    @GetMapping("/by/vendor/{vendor}")
+    public Collection<Asset> findAssetByVendor(@PathVariable AssetVendor assetVendor) {
+        return repository.findAllByAssetVendor(assetVendor)
+                .stream()
+                .filter(Asset::isAvailable)
                 .toList();
     }
 

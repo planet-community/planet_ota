@@ -1,5 +1,6 @@
 package uk.co.planetcom.infrastructure.ota.server.db.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -84,9 +85,16 @@ public class Asset implements Serializable {
     private boolean assetSuppressed; /* Whenever the asset has been suppressed, for whatever reason. */
 
     @Transient
+    @JsonIgnore
     public boolean isAvailable() {
-        return (this.releaseTimeStamp.isAfter(ZonedDateTime.now(ZoneId.of("Europe/London")))
+        return ((this.releaseTimeStamp.isAfter(ZonedDateTime.now(ZoneId.of("Europe/London")))
                 || this.releaseTimeStamp.isEqual(ZonedDateTime.now(ZoneId.of("Europe/London"))))
-                && !this.assetSuppressed;
+                && !this.assetSuppressed);
+    }
+
+    @Transient
+    @JsonIgnore
+    public boolean isNotAvailable() {
+        return !isAvailable();
     }
 }
