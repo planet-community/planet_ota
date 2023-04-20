@@ -85,8 +85,8 @@ public class Asset implements Serializable {
 
     @Transient
     public boolean isAvailable() {
-        return (this.releaseTimeStamp.isAfter(ZonedDateTime.now(ZoneId.systemDefault()))
-                || this.releaseTimeStamp.isEqual(ZonedDateTime.now()))
-                && this.assetSuppressed == false;
+        return (this.releaseTimeStamp.isAfter(ZonedDateTime.now(ZoneId.of("Europe/London")))
+                || this.releaseTimeStamp.isEqual(ZonedDateTime.now(ZoneId.of("Europe/London"))))
+                && !this.assetSuppressed;
     }
 }
