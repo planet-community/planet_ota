@@ -10,6 +10,7 @@ import uk.co.planetcom.infrastructure.ota.server.db.repositories.AssetsRepositor
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Collection;
 import java.util.UUID;
@@ -63,8 +64,8 @@ public class AssetController {
                 .assetVersion("v1.0.0")
                 .assetType(AssetType.CODI_BOOTLOADER)
                 .assetVendor(AssetVendor.CODI_OS)
-                .releaseTimeStamp(ZonedDateTime.now())
-                .uploadTimeStamp(ZonedDateTime.now())
+                .releaseTimeStamp(ZonedDateTime.now(ZoneId.systemDefault()))
+                .uploadTimeStamp(ZonedDateTime.now(ZoneId.systemDefault()))
                 .build();
 
         repository.saveAndFlush(asset);
