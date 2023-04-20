@@ -9,7 +9,9 @@ RUN git submodule update --init --recursive \
 FROM docker.io/eclipse-temurin:17-jre AS app
 
 ARG OTA_VERSION=0.1.0
+ARG TZ=Europe/London
+
 WORKDIR /home/app
 COPY --from=build /home/app/target/agnostos-$OTA_VERSION.war /home/app/agnostos.war
 
-ENTRYPOINT ["java", "-jar", "/home/app/agnostos.war"]
+ENTRYPOINT ["java", "-Duser.timezone=$TZ", "-jar", "/home/app/agnostos.war"]
