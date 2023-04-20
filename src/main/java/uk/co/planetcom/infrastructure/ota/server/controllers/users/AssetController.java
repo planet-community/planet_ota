@@ -25,17 +25,17 @@ public class AssetController {
 
     @GetMapping("/by/type/{assetType}")
     public Collection<Asset> findAssetByAssetType(@PathVariable AssetType assetType) {
-        return assetService.listAllByAssetType(assetType);
+        return assetService.findAllByAssetType(assetType);
     }
 
     @GetMapping("/")
     public Collection<Asset> findAssets() {
-        return assetService.list();
+        return assetService.findAll();
     }
 
     @GetMapping("/by/vendor/{vendorType}")
     public Collection<Asset> findAssetByVendor(@PathVariable AssetVendor vendorType) {
-        return assetService.listAllByVendorType(vendorType);
+        return assetService.findAllByVendorType(vendorType);
     }
 
 }
