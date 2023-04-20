@@ -1,6 +1,7 @@
 package uk.co.planetcom.infrastructure.ota.server.db.entities.enums;
 
-public enum CoDiVendor {
+public enum AssetVendor {
     PLANET,
-    CODI_OS
+    GEMIAN,
+    CODI_OS,
 }

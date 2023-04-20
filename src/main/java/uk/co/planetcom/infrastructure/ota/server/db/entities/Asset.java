@@ -1,16 +1,19 @@
 package uk.co.planetcom.infrastructure.ota.server.db.entities;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.UuidGenerator;
 import uk.co.planetcom.infrastructure.ota.server.db.entities.enums.AssetType;
+import uk.co.planetcom.infrastructure.ota.server.db.entities.enums.AssetVendor;
 import uk.co.planetcom.infrastructure.ota.server.db.entities.enums.converters.AssetTypeConverter;
+import uk.co.planetcom.infrastructure.ota.server.db.entities.enums.converters.AssetVendorConverter;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.UUID;
 
@@ -18,7 +21,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "assets")
 public class Asset implements Serializable {
     @Id
@@ -30,8 +35,23 @@ public class Asset implements Serializable {
     private UUID assetId; /* UUID/GUID to avoid column collision */
 
     @NotNull
-    @Column(nullable = false)
-    private URI assetObjectUri; /* URI to be checked for specific Asset */
+    @NotBlank
+    private String assetFileName; /* String representation of the filename that the object should be downloaded as. */
+
+    @NotNull
+    @Convert(converter = AssetVendorConverter.class)
+    private AssetVendor assetVendor; /* Vendor of Asset. */
+
+    @NotNull
+    @NotBlank
+    private String assetVersion; /* String, because Planet software versioning scheme varies greatly */
+
+    @NotNull
+    private URI assetDownloadUri; /* Generally a URI to either S3, or FileCoin. */
+
+    @NotNull
+    @NotBlank
+    private String assetSha256Hash; /* SHA-256 hash of the asset, generate with utility method in this class */
 
     @NotNull
     @Column(nullable = false)
@@ -48,13 +68,25 @@ public class Asset implements Serializable {
     @NotNull
     private AssetType assetType; /* Can be queried from the `AssetController` class. */
 
+    /* CoDi firmware specifics */
+
+    @Column(nullable = true) /* accept `null` values */
+    private String compatCodiFwVer;
+
+    @Column(nullable = true) /* accept `null` values */
+    private String compatCodiResVer;
+
+    /* End CoDi firmware specifics */
+
     @NotNull
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
     private boolean assetSuppressed; /* Whenever the asset has been suppressed, for whatever reason. */
 
+    @Transient
     public boolean isAvailable() {
-        return this.releaseTimeStamp.isAfter(ZonedDateTime.now())
-                && !this.assetSuppressed;
+        return (this.releaseTimeStamp.isAfter(ZonedDateTime.now(ZoneId.systemDefault()))
+                || this.releaseTimeStamp.isEqual(ZonedDateTime.now()))
+                && this.assetSuppressed == false;
     }
 }
