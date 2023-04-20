@@ -1,4 +1,4 @@
-package uk.co.planetcom.infrastructure.ota.server.db.entities;
+package uk.co.planetcom.infrastructure.ota.server.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -8,10 +8,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
-import uk.co.planetcom.infrastructure.ota.server.db.entities.enums.AssetType;
-import uk.co.planetcom.infrastructure.ota.server.db.entities.enums.AssetVendor;
-import uk.co.planetcom.infrastructure.ota.server.db.entities.enums.converters.AssetTypeConverter;
-import uk.co.planetcom.infrastructure.ota.server.db.entities.enums.converters.AssetVendorConverter;
+import org.hibernate.annotations.DynamicUpdate;
+import uk.co.planetcom.infrastructure.ota.server.enums.AssetType;
+import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendor;
+import uk.co.planetcom.infrastructure.ota.server.enums.converters.AssetTypeConverter;
+import uk.co.planetcom.infrastructure.ota.server.enums.converters.AssetVendorConverter;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -26,6 +27,7 @@ import java.util.UUID;
 @ToString
 @Builder
 @Entity
+@DynamicUpdate
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "assets")
 public class Asset implements Serializable {
@@ -90,7 +92,7 @@ public class Asset implements Serializable {
     @JsonIgnore
     public boolean isAvailable() {
 
-        return (this.releaseTimeStamp.isAfter(ZonedDateTime.now(ZoneId.systemDefault()))
+        return (this.releaseTimeStamp.isAfter(ZonedDateTime.now(ZoneId.of("Europe/London")))
                 && !this.assetSuppressed);
     }
 

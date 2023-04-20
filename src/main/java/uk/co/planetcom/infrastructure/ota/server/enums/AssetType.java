@@ -1,4 +1,4 @@
-package uk.co.planetcom.infrastructure.ota.server.db.entities.enums;
+package uk.co.planetcom.infrastructure.ota.server.enums;
 
 public enum AssetType {
     CODI_BOOTLOADER,

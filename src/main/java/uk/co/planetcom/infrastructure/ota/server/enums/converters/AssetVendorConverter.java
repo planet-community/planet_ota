@@ -1,8 +1,8 @@
-package uk.co.planetcom.infrastructure.ota.server.db.entities.enums.converters;
+package uk.co.planetcom.infrastructure.ota.server.enums.converters;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
-import uk.co.planetcom.infrastructure.ota.server.db.entities.enums.AssetVendor;
+import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendor;
 
 @Converter
 public class AssetVendorConverter implements AttributeConverter<AssetVendor, String> {
