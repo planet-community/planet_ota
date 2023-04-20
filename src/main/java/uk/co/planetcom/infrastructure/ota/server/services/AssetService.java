@@ -41,31 +41,31 @@ public class AssetService {
         repository.save(asset);
     }
 
-    public List<Asset> list() {
+    public List<Asset> findAll() {
         return repository.findAll()
                 .stream()
-                .filter(Asset::isAvailable)
+                .filter(Asset::isNotAvailable)
                 .toList();
     }
 
-    public List<Asset> listAllByVendorType(AssetVendor assetVendor) {
+    public List<Asset> findAllByVendorType(AssetVendor assetVendor) {
         return repository.findAllByAssetVendor(assetVendor)
                 .stream()
-                .filter(Asset::isAvailable)
+                .filter(Asset::isNotAvailable)
                 .toList();
     }
 
     public Optional<Asset> findByUuid(UUID uuid) {
         return repository.findById(uuid)
                 .stream()
-                .filter(Asset::isAvailable)
+                .filter(Asset::isNotAvailable)
                 .findFirst();
     }
 
-    public List<Asset> listAllByAssetType(AssetType assetType) {
+    public List<Asset> findAllByAssetType(AssetType assetType) {
         return repository.findAllByAssetType(assetType)
                 .stream()
-                .filter(Asset::isAvailable)
+                .filter(Asset::isNotAvailable)
                 .toList();
     }
 }
