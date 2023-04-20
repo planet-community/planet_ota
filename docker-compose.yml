@@ -6,6 +6,7 @@ services:
     image: "docker.io/postgres:alpine"
     hostname: "postgres_agnostos"
     container_name: "postgres_planet_ota"
+    restart: on-failure
     volumes:
       - "postgresql_agnostos_data:/var/lib/postgresql/data"
     environment:
@@ -17,5 +18,8 @@ services:
     image: "ghcr.io/shymega/agnostos:latest"
     hostname: "agnostos"
     container_name: "agnostos"
+    restart: on-failure
+    depends_on:
+      - postgresql_agnostos
     ports:
       - "8080:8080"
