@@ -1,4 +1,4 @@
-package uk.co.planetcom.infrastructure.ota.server.controller.webhooks;
+package uk.co.planetcom.infrastructure.ota.server.controllers.webhooks;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.HmacAlgorithms;
@@ -29,7 +29,7 @@ public class GitHubWebhookController {
         try {
             log.debug("Computing GitHub SHA-1 hash..");
             byte[] computedHash = String.format("sha1=%s", new HmacUtils(HmacAlgorithms.HMAC_SHA_1,
-                    GITHUB_CODID_WEBHOOK_SECRET.getBytes()).hmacHex(payload.getBytes()))
+                            GITHUB_CODID_WEBHOOK_SECRET.getBytes()).hmacHex(payload.getBytes()))
                     .getBytes();
 
             log.debug("Testing GitHub webhook validity and integrity.");
