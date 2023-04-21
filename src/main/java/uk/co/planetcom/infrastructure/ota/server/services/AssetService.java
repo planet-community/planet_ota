@@ -26,6 +26,13 @@ public class AssetService {
         repository.delete(entity);
     }
 
+    public void setNewReleaseTimestamp(UUID id, ZonedDateTime newReleaseTimestamp) {
+        Asset asset = repository.findById(id)
+                .orElseThrow();
+        asset.setReleaseTimeStamp(newReleaseTimestamp);;
+        repository.save(asset);
+    }
+
     public void suppressAsset(UUID id) {
         modifySuppressed(id, true);
     }
