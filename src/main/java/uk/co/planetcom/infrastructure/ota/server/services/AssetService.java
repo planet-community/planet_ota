@@ -6,7 +6,9 @@ import uk.co.planetcom.infrastructure.ota.server.db.repositories.AssetsRepositor
 import uk.co.planetcom.infrastructure.ota.server.domain.Asset;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetType;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendor;
+import uk.co.planetcom.infrastructure.ota.server.utils.UrlUtils;
 
+import java.net.MalformedURLException;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +19,8 @@ public class AssetService {
     @Autowired
     private AssetsRepository repository;
 
-    public Asset create(Asset entity) {
+    public Asset create(Asset entity) throws MalformedURLException {
+        entity.setAssetFileName(UrlUtils.getUrlFileName(entity.getAssetDownloadUri().toString()));
         return repository.saveAndFlush(entity);
     }
 
