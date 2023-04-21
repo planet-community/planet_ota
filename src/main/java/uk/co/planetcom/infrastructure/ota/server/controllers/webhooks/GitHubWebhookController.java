@@ -1,5 +1,6 @@
 package uk.co.planetcom.infrastructure.ota.server.controllers.webhooks;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.HmacAlgorithms;
 import org.apache.commons.codec.digest.HmacUtils;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 @Slf4j
 @RestController
+@Hidden
 @RequestMapping("/webhooks/github")
 public class GitHubWebhookController {
     private final int SIG_LEN = 45;
