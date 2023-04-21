@@ -7,11 +7,10 @@ import uk.co.planetcom.infrastructure.ota.server.domain.Asset;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetType;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendor;
 
-import java.util.Collection;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class AssetService {
@@ -43,7 +42,7 @@ public class AssetService {
 
     private void modifySuppressed(UUID id, boolean suppression) {
         Asset asset = repository.findById(id)
-                        .orElseThrow();
+                .orElseThrow();
         asset.setAssetSuppressed(suppression);
         repository.save(asset);
     }
