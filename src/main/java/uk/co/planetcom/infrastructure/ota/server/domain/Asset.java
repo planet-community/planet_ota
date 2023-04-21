@@ -35,7 +35,6 @@ public class Asset implements Serializable {
     @GeneratedValue(strategy = GenerationType.UUID)
     @NotNull
     @Column(nullable = false)
-    @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
     private UUID assetId; /* UUID/GUID to avoid column collision */
 
