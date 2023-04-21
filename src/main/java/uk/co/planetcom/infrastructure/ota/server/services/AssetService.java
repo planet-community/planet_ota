@@ -31,7 +31,7 @@ public class AssetService {
     public void setNewReleaseTimestamp(UUID id, ZonedDateTime newReleaseTimestamp) {
         Asset asset = repository.findById(id)
                 .orElseThrow();
-        asset.setReleaseTimeStamp(newReleaseTimestamp)
+        asset.setReleaseTimeStamp(newReleaseTimestamp);
         repository.save(asset);
     }
 
