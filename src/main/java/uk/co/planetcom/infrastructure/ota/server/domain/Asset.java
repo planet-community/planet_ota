@@ -48,10 +48,14 @@ public class Asset implements Serializable {
 
     @NotNull
     @NotBlank
-    private String assetVersion; /* String, because Planet software versioning scheme varies greatly */
+    private String assetVersion; /* Arbitrary String denoting the version of the Asset */.
 
     @NotNull
-    private URI assetDownloadUri; /* Generally a URI to either S3, or FileCoin. */
+    private URI assetDownloadUri; /* A URI to the asset. */
+
+    @NotNull
+    @NotBlank
+    private String assetChangelog; /* Newline delimited String of changes in this asset. */
 
     @NotNull
     @NotBlank
@@ -65,7 +69,7 @@ public class Asset implements Serializable {
     @NotNull
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
-    private ZonedDateTime uploadTimeStamp; /* When the asset was uploaded to the OTA system by Planet. */
+    private ZonedDateTime uploadTimeStamp; /* When the asset was uploaded to Agnostos.. */
 
     @Convert(converter = AssetTypeConverter.class)
     @Column(nullable = false)
@@ -90,7 +94,6 @@ public class Asset implements Serializable {
     @Transient
     @JsonIgnore
     public boolean isAvailable() {
-
         return (this.releaseTimeStamp.isAfter(ZonedDateTime.now(ZoneId.of("Europe/London")))
                 && !this.assetSuppressed);
     }
