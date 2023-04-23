@@ -48,7 +48,7 @@ public class Asset implements Serializable {
 
     @NotNull
     @NotBlank
-    private String assetVersion; /* Arbitrary String denoting the version of the Asset */.
+    private String assetVersion; /* Arbitrary String denoting the version of the Asset */
 
     @NotNull
     private URI assetDownloadUri; /* A URI to the asset. */
