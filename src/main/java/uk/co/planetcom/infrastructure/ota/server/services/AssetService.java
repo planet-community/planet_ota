@@ -32,7 +32,7 @@ public class AssetService {
         Asset asset = repository.findById(id)
                 .orElseThrow();
         asset.setReleaseTimeStamp(newReleaseTimestamp);
-        repository.save(asset);
+        repository.saveAndFlush(asset);
     }
 
     public void suppressAsset(UUID id) {
