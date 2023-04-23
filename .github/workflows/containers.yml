@@ -4,7 +4,6 @@ on:
   workflow_run:
     workflows: ["CodeQL workflow"]
     types: [completed]
-    branches: [main]
 
 jobs:
   build-agnostos-container-image:
