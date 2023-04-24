@@ -39,8 +39,8 @@ public class GitHubWebhookController {
                 log.warn("Warning: Webhook invalid.");
                 log.warn("Ignoring webhook call, and returning with 401.");
                 log.debug("For debugging purposes, webhook payload and signature are here:");
-                log.debug("Payload: ", payload);
-                log.debug("Signature: ", sig);
+                log.debug("Payload: {}", payload);
+                log.debug("Signature: {}", sig);
 
                 return new ResponseEntity<>(Collections.singletonMap("errorMessage", "INVALID_SIG"),
                         HttpStatus.UNAUTHORIZED);
