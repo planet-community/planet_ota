@@ -46,7 +46,7 @@ public class GitHubWebhookController {
                         HttpStatus.UNAUTHORIZED);
             }
         } catch (Exception e) {
-            log.error("We encountered an exception. It's probably an error comparing the hash, but we don't want to tell the client. Return 500.");
+            log.error("We encountered an exception. It's probably an error comparing the hash, but we don't want to tell the client. Return 403.");
             return new ResponseEntity<>(Collections.singletonMap("errorMessage", "INVALID_SIG"),
                     HttpStatus.UNAUTHORIZED);
         }
