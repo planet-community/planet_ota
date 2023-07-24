@@ -1,4 +1,4 @@
-package uk.co.planetcom.infrastructure.ota.server.enums.converters;
+package uk.co.planetcom.infrastructure.ota.server.db.converters;
 
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
