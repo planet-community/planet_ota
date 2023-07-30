@@ -81,9 +81,7 @@ public class Asset implements Serializable {
     @Convert(converter = AssetTypeConverter.class)
     @Column(nullable = false)
     @NotNull
-    private AssetType assetType; /* Can be queried from the `AssetController` class. */
-
-    /* CoDi firmware specifics */
+    private AssetType assetType; /* Can be queried from the `AssetService` class. */
 
     @Convert(converter = UpdateChannelConverter.class)
     @Column(nullable = false)
