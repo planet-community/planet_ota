@@ -45,5 +45,10 @@ public class V1AssetController extends V1ControllerBase {
         return assetService.findAllByUpdateChannel(channel);
     }
 
+    /* should be auth'd */
+    @DeleteMapping(value = "/by/uuid/{uuid}", produces = V1_API_ACCEPT_HEADER_VALUE)
+    public ResponseEntity<Object> deleteAssetByUuid(@PathVariable UUID uuid) {
+        assetService.delete(assetService.findByUuid(uuid).orElseThrow());
+        return ResponseEntity.noContent().build();
     }
 }
