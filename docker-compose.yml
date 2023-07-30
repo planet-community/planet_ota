@@ -1,30 +1,30 @@
 version: "3"
 volumes:
-  postgresql_agnostos_data:
+  postgresql_planet_ota_data:
 services:
-  postgresql_agnostos:
+  postgresql_planet_ota:
     image: "docker.io/postgres:alpine"
-    hostname: "postgres_agnostos"
+    hostname: "postgres_planet_ota"
     container_name: "postgres_planet_ota"
     restart: on-failure
     volumes:
-      - "postgresql_agnostos_data:/var/lib/postgresql/data"
+      - "postgresql_planet_ota_data:/var/lib/postgresql/data"
     environment:
-      - "POSTGRES_USER=${DB_USER:-agnostos_user}"
+      - "POSTGRES_USER=${DB_USER:-planet_ota_user}"
       - "POSTGRES_PASSWORD=${DB_PASSWORD:-password123}"
-      - "POSTGRES_DB=${DB_NAME:-agnostos_db}"
-  agnostos:
+      - "POSTGRES_DB=${DB_NAME:-planet_ota_db}"
+  planet_ota:
     build:
       context: .
       args:
         TZ: "${TZ:-Europe/London}"
-    image: "ghcr.io/shymega/agnostos:latest"
-    hostname: "agnostos"
-    container_name: "agnostos"
+    image: "ghcr.io/shymega/planet_ota:latest"
+    hostname: "planet_ota"
+    container_name: "planet_ota"
     restart: on-failure
     environment:
       TZ: "${TZ:-Europe/London}"
     depends_on:
-      - postgresql_agnostos
+      - postgresql_planet_ota
     ports:
       - "8080:8080"

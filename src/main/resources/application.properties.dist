@@ -1,5 +1,5 @@
-spring.datasource.url=jdbc:postgresql://postgres_agnostos:5432/${DB_NAME:agnostos_db}
-spring.datasource.username=${DB_USER:agnostos_user}
+spring.datasource.url=jdbc:postgresql://postgres_planet_ota:5432/${DB_NAME:planet_ota_db}
+spring.datasource.username=${DB_USER:planet_ota_user}
 spring.datasource.password=${DB_PASSWORD:password123}
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=update
