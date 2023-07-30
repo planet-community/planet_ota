@@ -9,10 +9,12 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.DynamicUpdate;
+import uk.co.planetcom.infrastructure.ota.server.db.converters.UpdateChannelConverter;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetType;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendor;
 import uk.co.planetcom.infrastructure.ota.server.enums.converters.AssetTypeConverter;
 import uk.co.planetcom.infrastructure.ota.server.enums.converters.AssetVendorConverter;
+import uk.co.planetcom.infrastructure.ota.server.enums.UpdateChannel;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -78,13 +80,10 @@ public class Asset implements Serializable {
 
     /* CoDi firmware specifics */
 
-    @Column(nullable = true) /* accept `null` values */
-    private String compatCodiFwVer;
-
-    @Column(nullable = true) /* accept `null` values */
-    private String compatCodiResVer;
-
-    /* End CoDi firmware specifics */
+    @Convert(converter = UpdateChannelConverter.class)
+    @Column(nullable = false)
+    @NotNull
+    private UpdateChannel updateChannel; /* Channel that the update is released on. */
 
     @NotNull
     @Column(nullable = false)

@@ -2,10 +2,11 @@ package uk.co.planetcom.infrastructure.ota.server.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import uk.co.planetcom.infrastructure.ota.server.db.repositories.AssetsRepository;
+import uk.co.planetcom.infrastructure.ota.server.db.AssetsRepository;
 import uk.co.planetcom.infrastructure.ota.server.domain.Asset;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetType;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendor;
+import uk.co.planetcom.infrastructure.ota.server.enums.UpdateChannel;
 import uk.co.planetcom.infrastructure.ota.server.utils.UrlUtils;
 
 import java.net.MalformedURLException;
@@ -73,6 +74,13 @@ public class AssetService {
 
     public List<Asset> findAllByAssetType(AssetType assetType) {
         return repository.findAllByAssetType(assetType)
+                .stream()
+                .filter(Asset::isNotAvailable)
+                .toList();
+    }
+
+    public List<Asset> findAllByUpdateChannel(UpdateChannel updateChannel) {
+        return repository.findAllByUpdateChannel(updateChannel)
                 .stream()
                 .filter(Asset::isNotAvailable)
                 .toList();
