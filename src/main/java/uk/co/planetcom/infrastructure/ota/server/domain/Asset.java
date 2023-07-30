@@ -76,7 +76,7 @@ public class Asset implements Serializable {
     @NotNull
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
-    private ZonedDateTime uploadTimeStamp; /* When the asset was uploaded to Agnostos.. */
+    private ZonedDateTime uploadTimeStamp; /* When the asset was uploaded to the OTA system. */
 
     @Convert(converter = AssetTypeConverter.class)
     @Column(nullable = false)
