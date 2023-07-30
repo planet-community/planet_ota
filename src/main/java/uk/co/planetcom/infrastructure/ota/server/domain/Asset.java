@@ -91,7 +91,8 @@ public class Asset implements Serializable {
     @Transient
     @JsonIgnore
     public boolean isAvailable() {
-        return (this.releaseTimeStamp.isAfter(ZonedDateTime.now(ZoneId.of("Europe/London")))
+        return (this.releaseTimeStamp.isAfter(ZonedDateTime.now(
+                ZoneId.of(Optional.ofNullable(System.getenv("TZ")).orElse("Europe/London"))))
                 && !this.assetSuppressed);
     }
 
