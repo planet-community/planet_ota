@@ -83,7 +83,11 @@ public class Asset implements Serializable {
     @NotNull
     private UpdateChannel updateChannel; /* Channel that the update is released on. */
 
+    @Column(nullable = false)
+    @Embedded
     @NotNull
+    private AssetCompat assetCompat;
+
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
     private boolean assetSuppressed; /* Whenever the asset has been suppressed, for whatever reason. */
