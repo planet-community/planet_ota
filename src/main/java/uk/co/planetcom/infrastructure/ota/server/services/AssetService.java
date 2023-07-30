@@ -54,35 +54,35 @@ public class AssetService {
     public List<Asset> findAll() {
         return repository.findAll()
                 .stream()
-                .filter(Asset::isNotAvailable)
+                .filter(Asset::isAvailable)
                 .toList();
     }
 
     public List<Asset> findAllByVendorType(AssetVendor assetVendor) {
         return repository.findAllByAssetVendor(assetVendor)
                 .stream()
-                .filter(Asset::isNotAvailable)
+                .filter(Asset::isAvailable)
                 .toList();
     }
 
     public Optional<Asset> findByUuid(UUID uuid) {
         return repository.findById(uuid)
                 .stream()
-                .filter(Asset::isNotAvailable)
+                .filter(Asset::isAvailable)
                 .findFirst();
     }
 
     public List<Asset> findAllByAssetType(AssetType assetType) {
         return repository.findAllByAssetType(assetType)
                 .stream()
-                .filter(Asset::isNotAvailable)
+                .filter(Asset::isAvailable)
                 .toList();
     }
 
     public List<Asset> findAllByUpdateChannel(UpdateChannel updateChannel) {
         return repository.findAllByUpdateChannel(updateChannel)
                 .stream()
-                .filter(Asset::isNotAvailable)
+                .filter(Asset::isAvailable)
                 .toList();
     }
 }
