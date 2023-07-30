@@ -11,6 +11,7 @@ import uk.co.planetcom.infrastructure.ota.server.services.AssetService;
 import java.util.Collection;
 import java.util.UUID;
 
+@RestController
 @RequestMapping("/api/v1/assets")
 public class V1AssetController extends V1ControllerBase {
 
