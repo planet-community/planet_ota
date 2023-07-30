@@ -1,6 +1,7 @@
 package uk.co.planetcom.infrastructure.ota.server.controllers.v1.clients;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.co.planetcom.infrastructure.ota.server.domain.Asset;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetType;
