@@ -45,23 +45,28 @@ public class Asset implements Serializable {
     private String assetFileName; /* String representation of the filename that the object was uploaded as. */
 
     @NotNull
+    @Column(nullable = false)
     @Convert(converter = AssetVendorConverter.class)
     private AssetVendor assetVendor; /* Vendor of Asset. */
 
     @NotNull
     @NotBlank
+    @Column(nullable = false)
     private String assetVersion; /* Arbitrary String denoting the version of the Asset */
 
     @NotNull
+    @Column(nullable = false)
     private URI assetDownloadUri; /* A URI to the asset. */
 
     @NotNull
     @NotBlank
+    @Column(nullable = false)
     private String assetChangelog; /* Newline delimited String of changes in this asset. */
 
     @NotNull
     @NotBlank
-    private String assetSha256Hash; /* SHA-256 hash of the asset, generate with utility method in this class */
+    @Column(nullable = false)
+    private String assetSha256Hash; /* SHA-256 hash of the asset, generate from bytes stored in RDBMS */
 
     @NotNull
     @Column(nullable = false)
