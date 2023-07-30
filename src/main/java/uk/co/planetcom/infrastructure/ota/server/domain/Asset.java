@@ -8,11 +8,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.DynamicUpdate;
+import uk.co.planetcom.infrastructure.ota.server.db.converters.AssetTypeConverter;
+import uk.co.planetcom.infrastructure.ota.server.db.converters.AssetVendorConverter;
 import uk.co.planetcom.infrastructure.ota.server.db.converters.UpdateChannelConverter;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetType;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendor;
-import uk.co.planetcom.infrastructure.ota.server.enums.converters.AssetTypeConverter;
-import uk.co.planetcom.infrastructure.ota.server.enums.converters.AssetVendorConverter;
 import uk.co.planetcom.infrastructure.ota.server.enums.UpdateChannel;
 
 import java.io.Serializable;
