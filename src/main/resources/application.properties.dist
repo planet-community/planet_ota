@@ -7,4 +7,3 @@ github.webhooks.secrets.codid=${GH_CODID_WEBHOOK_SECRET:secret123}
 spring.mvc.view.prefix=/WEB-INF/jsp/
 spring.mvc.view.suffix=.jsp
 springdoc.swagger-ui.path=/api-ui
-server.servlet.context-path=/api/v1
