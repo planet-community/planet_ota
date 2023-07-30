@@ -41,7 +41,8 @@ public class Asset implements Serializable {
 
     @NotNull
     @NotBlank
-    private String assetFileName; /* String representation of the filename that the object should be downloaded as. */
+    @Column(nullable = false)
+    private String assetFileName; /* String representation of the filename that the object was uploaded as. */
 
     @NotNull
     @Convert(converter = AssetVendorConverter.class)
