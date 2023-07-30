@@ -38,7 +38,7 @@ public class GitHubWebhookController {
             if (sig.length() != SIG_LEN || MessageDigest.isEqual(sig.getBytes(), computedHash)) {
                 log.warn("Warning: Webhook invalid.");
                 log.warn("Ignoring webhook call, and returning with 401.");
-                log.debug("For debugging purposes, webhook payload and signature are here:");
+                log.debug("For debugging purposes, webhook payload and signature are printed below:");
                 log.debug("Payload: {}", payload);
                 log.debug("Signature: {}", sig);
 
