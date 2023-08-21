@@ -35,7 +35,7 @@ stdenv.mkDerivation rec {
 
     makeWrapper ${jdk17}/bin/java $out/bin/${pname} \
       --add-flags "-classpath $out/share/java/${pname}-${version}.war:''${classpath#:}" \
-      --add-flags "Main"
+      --add-flags "uk.co.planetcom.infrastructure.ota.server.Application"
 
     runHook postInstall
   '';
