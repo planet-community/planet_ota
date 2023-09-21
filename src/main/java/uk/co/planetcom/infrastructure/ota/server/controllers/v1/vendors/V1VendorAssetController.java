@@ -29,7 +29,7 @@ public class V1VendorAssetController {
     private AssetService assetService;
 
     @PostMapping(value = "/create-sample-asset", produces = V1_API_ACCEPT_HEADER_VALUE)
-    public ResponseEntity<Asset> createSampleAsset() {
+    public ResponseEntity<Asset> createSampleAsset() throws MalformedURLException {
         Asset asset = Asset.builder()
             .assetChangelog(Arrays.stream("Made serial connection more reliable.\nInitial work to introduce address book.\n".split("\n")).toList())
             .assetVendor(AssetVendor.CODI_OS)
