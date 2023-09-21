@@ -15,6 +15,8 @@ public class CodidWebhookController extends GitHubWebhookController {
 
     @Value("${github.webhooks.secrets.codid}")
     private String WEBHOOK_SECRET;
+
     @Override
-    protected void dispatch() {}
+    protected void dispatch() {
+    }
 }

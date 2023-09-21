@@ -22,7 +22,8 @@ import java.util.UUID;
 import static uk.co.planetcom.infrastructure.ota.server.controllers.v1.V1Constants.V1_API_ACCEPT_HEADER_VALUE;
 
 @RestController
-@Hidden // Hide this controller from OpenAPI v3. We want the public to be able to use the public APIs, but not the Vendor APIs.
+@Hidden
+// Hide this controller from OpenAPI v3. We want the public to be able to use the public APIs, but not the Vendor APIs.
 @RequestMapping("/api/v1/vendor/assets")
 public class V1VendorAssetController {
     @Autowired

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Embedded;
 import lombok.*;
-import org.aspectj.weaver.ast.And;
 
 import java.util.List;
 

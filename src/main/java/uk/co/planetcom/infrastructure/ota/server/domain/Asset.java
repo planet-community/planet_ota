@@ -45,53 +45,43 @@ public class Asset implements Serializable {
         ZoneId.of(this.timeZone));
 
     // End Helper fields.
-
+    @NotNull
+    @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
+    private ZonedDateTime uploadTimeStamp = this.currentTs; /* When the asset was uploaded to the OTA system. */
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @NotNull
     @Column(nullable = false)
     @Setter(AccessLevel.NONE)
     private UUID assetId; /* UUID/GUID to avoid column collision */
-
     @NotNull
     @NotBlank
     @Column(nullable = false)
     private String assetFileName; /* String representation of the filename that the object was uploaded as. */
-
     @NotNull
     @Column(nullable = false)
     @Convert(converter = AssetVendorConverter.class)
     private AssetVendor assetVendor; /* Vendor of Asset. */
-
     @NotNull
     @NotBlank
     @Column(nullable = false)
     private String assetVersion; /* Arbitrary String denoting the version of the Asset */
-
     @NotNull
     @Column(nullable = false)
     private URI assetDownloadUri; /* A URI to the asset. */
-
     @NotNull
     @ElementCollection
     @Column(nullable = false)
     private List<String> assetChangelog; /* Newline delimited String of changes in this asset. */
-
     @NotNull
     @NotBlank
     @Column(nullable = false)
     private String assetSha256Hash; /* SHA-256 hash of the asset, generate from bytes stored in RDBMS */
-
     @NotNull
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
     private ZonedDateTime releaseTimeStamp; /* When the asset is 'due' to be released to users. */
-
-    @NotNull
-    @Column(nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
-    private ZonedDateTime uploadTimeStamp = this.currentTs; /* When the asset was uploaded to the OTA system. */
-
     @Convert(converter = AssetTypeConverter.class)
     @Column(nullable = false)
     @NotNull
