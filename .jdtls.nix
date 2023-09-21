@@ -4,32 +4,33 @@
 , writeScriptBin
 }:
 
-let jdtls = stdenv.mkDerivation rec {
-  pname = "jdtls";
-  version = "1.9.0";
+let
+  jdtls = stdenv.mkDerivation rec {
+    pname = "jdtls";
+    version = "1.9.0";
 
-  src = fetchurl {
-    url = "https://download.eclipse.org/jdtls/milestones/${version}/jdt-language-server-${version}-202203031534.tar.gz";
-    sha256 = "b8af1925cb3b817fd1061e00a45ffbc6aca76819d8b2f5939626009ebf432fc7";
-  };
+    src = fetchurl {
+      url = "https://download.eclipse.org/jdtls/milestones/${version}/jdt-language-server-${version}-202203031534.tar.gz";
+      sha256 = "b8af1925cb3b817fd1061e00a45ffbc6aca76819d8b2f5939626009ebf432fc7";
+    };
     sourceRoot = ".";
 
-  dontBuild = true;
+    dontBuild = true;
 
-  installPhase = ''
-    runHook preInstall
+    installPhase = ''
+      runHook preInstall
 
-    mkdir -p $out
-    cp -Rv . $out/
+      mkdir -p $out
+      cp -Rv . $out/
 
-    runHook postInstall
-  '';
-};
+      runHook postInstall
+    '';
+  };
 
 in
 # Since nvimlsp config does not support jdtls_config outside of JDTLS_HOME,
-# we manually build symlinks and copy config files. (Ideally, this should be
-# changed in nvimlsp but)
+  # we manually build symlinks and copy config files. (Ideally, this should be
+  # changed in nvimlsp but)
 writeScriptBin "jdtls_build_links" ''
   source="${jdtls}"
   target="$1"
