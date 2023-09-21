@@ -33,6 +33,19 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "assets")
 public class Asset implements Serializable {
+    // Helper fields:
+    @Transient
+    @JsonIgnore
+    private final String timeZone = Optional.ofNullable(System.getenv("TZ"))
+        .orElse("Europe/London");
+
+    @Transient
+    @JsonIgnore
+    private final ZonedDateTime currentTs = ZonedDateTime.now(
+        ZoneId.of(this.timeZone));
+
+    // End Helper fields.
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @NotNull
@@ -77,7 +90,7 @@ public class Asset implements Serializable {
     @NotNull
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
-    private ZonedDateTime uploadTimeStamp; /* When the asset was uploaded to the OTA system. */
+    private ZonedDateTime uploadTimeStamp = this.currentTs; /* When the asset was uploaded to the OTA system. */
 
     @Convert(converter = AssetTypeConverter.class)
     @Column(nullable = false)
@@ -96,14 +109,13 @@ public class Asset implements Serializable {
 
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
-    private boolean assetSuppressed; /* Whenever the asset has been suppressed, for whatever reason. */
+    // By default, not suppressed.
+    private boolean assetSuppressed = false; /* Whenever the asset has been suppressed, for whatever reason. */
 
     @Transient
     @JsonIgnore
     public boolean isAvailable() {
-        return (this.releaseTimeStamp.isAfter(ZonedDateTime.now(
-                ZoneId.of(Optional.ofNullable(System.getenv("TZ")).orElse("Europe/London"))))
-                && !this.assetSuppressed);
+        return !(this.releaseTimeStamp.isAfter(this.currentTs) && !this.isAssetSuppressed());
     }
 
     @Transient
