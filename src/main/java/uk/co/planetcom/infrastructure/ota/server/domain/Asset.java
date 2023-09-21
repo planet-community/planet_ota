@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.net.URI;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -59,9 +60,9 @@ public class Asset implements Serializable {
     private URI assetDownloadUri; /* A URI to the asset. */
 
     @NotNull
-    @NotBlank
+    @ElementCollection
     @Column(nullable = false)
-    private String assetChangelog; /* Newline delimited String of changes in this asset. */
+    private List<String> assetChangelog; /* Newline delimited String of changes in this asset. */
 
     @NotNull
     @NotBlank
