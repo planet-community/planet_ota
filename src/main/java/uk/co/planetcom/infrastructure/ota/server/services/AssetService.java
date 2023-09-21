@@ -31,7 +31,7 @@ public class AssetService {
 
     public void setNewReleaseTimestamp(UUID id, ZonedDateTime newReleaseTimestamp) {
         Asset asset = repository.findById(id)
-                .orElseThrow();
+            .orElseThrow();
         asset.setReleaseTimeStamp(newReleaseTimestamp);
         repository.saveAndFlush(asset);
     }
@@ -46,43 +46,43 @@ public class AssetService {
 
     private void modifySuppressed(UUID id, boolean suppression) {
         Asset asset = repository.findById(id)
-                .orElseThrow();
+            .orElseThrow();
         asset.setAssetSuppressed(suppression);
         repository.save(asset);
     }
 
     public List<Asset> findAll() {
         return repository.findAll()
-                .stream()
-                .filter(Asset::isAvailable)
-                .toList();
+            .stream()
+            .filter(Asset::isAvailable)
+            .toList();
     }
 
     public List<Asset> findAllByVendorType(AssetVendor assetVendor) {
         return repository.findAllByAssetVendor(assetVendor)
-                .stream()
-                .filter(Asset::isAvailable)
-                .toList();
+            .stream()
+            .filter(Asset::isAvailable)
+            .toList();
     }
 
     public Optional<Asset> findByUuid(UUID uuid) {
         return repository.findById(uuid)
-                .stream()
-                .filter(Asset::isAvailable)
-                .findFirst();
+            .stream()
+            .filter(Asset::isAvailable)
+            .findFirst();
     }
 
     public List<Asset> findAllByAssetType(AssetType assetType) {
         return repository.findAllByAssetType(assetType)
-                .stream()
-                .filter(Asset::isAvailable)
-                .toList();
+            .stream()
+            .filter(Asset::isAvailable)
+            .toList();
     }
 
     public List<Asset> findAllByUpdateChannel(UpdateChannel updateChannel) {
         return repository.findAllByUpdateChannel(updateChannel)
-                .stream()
-                .filter(Asset::isAvailable)
-                .toList();
+            .stream()
+            .filter(Asset::isAvailable)
+            .toList();
     }
 }
