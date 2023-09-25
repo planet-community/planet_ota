@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import lombok.experimental.Accessors;
 import org.hibernate.annotations.DynamicUpdate;
 import uk.co.planetcom.infrastructure.ota.server.db.converters.AssetTypeConverter;
 import uk.co.planetcom.infrastructure.ota.server.db.converters.AssetVendorConverter;
@@ -32,23 +33,16 @@ import java.util.UUID;
 @DynamicUpdate
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "assets")
+// TODO: Javadoc and OpenAPI doc this class.
 public class Asset implements Serializable {
-    // Helper fields:
     @Transient
     @JsonIgnore
-    private final String timeZone = Optional.ofNullable(System.getenv("TZ"))
-        .orElse("Europe/London");
-
-    @Transient
-    @JsonIgnore
-    private final ZonedDateTime currentTs = ZonedDateTime.now(
-        ZoneId.of(this.timeZone));
-
-    // End Helper fields.
+    private final ZoneId timeZone = ZoneId.of(Optional.ofNullable(System.getenv("TZ"))
+        .orElse("Europe/London"));
     @NotNull
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
-    private ZonedDateTime uploadTimeStamp = this.currentTs; /* When the asset was uploaded to the OTA system. */
+    private ZonedDateTime uploadTimeStamp; /* When the asset was uploaded to the OTA system. */
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @NotNull
@@ -86,31 +80,35 @@ public class Asset implements Serializable {
     @Column(nullable = false)
     @NotNull
     private AssetType assetType; /* Can be queried from the `AssetService` class. */
-
     @Convert(converter = UpdateChannelConverter.class)
     @Column(nullable = false)
     @NotNull
     private UpdateChannel updateChannel; /* Channel that the update is released on. */
-
     @Column(nullable = false)
     @Embedded
     @NotNull
     private AssetCompat assetCompat;
-
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
     // By default, not suppressed.
-    private boolean assetSuppressed = false; /* Whenever the asset has been suppressed, for whatever reason. */
-
+    private boolean assetSuppressed; /* Whenever the asset has been suppressed, for whatever reason. */
     @Transient
     @JsonIgnore
     public boolean isAvailable() {
-        return !(this.releaseTimeStamp.isAfter(this.currentTs) && !this.isAssetSuppressed());
+        return !(this.releaseTimeStamp.isAfter(ZonedDateTime.now(this.timeZone)) && !this.isAssetSuppressed());
     }
-
     @Transient
     @JsonIgnore
     public boolean isNotAvailable() {
         return !isAvailable();
+    }
+    @PrePersist
+    @Transient
+    @JsonIgnore
+    public void preUploadTimestamp() {
+        if (this.uploadTimeStamp == null) {
+            // Null value.
+            this.uploadTimeStamp = ZonedDateTime.now(this.timeZone);
+        }
     }
 }
