@@ -1,33 +1,32 @@
 package uk.co.planetcom.infrastructure.ota.server.controllers.webhooks.github;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.digest.HmacAlgorithms;
 import org.apache.commons.codec.digest.HmacUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.security.MessageDigest;
 import java.util.Collections;
 import java.util.Map;
 
-@Slf4j
-@RestController
-@Hidden
-@RequestMapping("/webhooks/github")
-public abstract class GitHubWebhookController {
+public abstract class BaseGitHubWebhookAbstractClass {
+    protected final Logger log = LoggerFactory.getLogger(getClass());
+
     private final int SIG_LEN = 45;
 
     private final String WEBHOOK_SECRET = "";
 
     protected abstract void dispatch();
 
-    protected ResponseEntity<Map> receiveWebhook(@RequestHeader("X-Hub-Signature") String sig,
-                                                 @RequestBody String payload) {
+    public abstract ResponseEntity<Map> receiveWebhook(@RequestHeader("X-Hub-Signature") String sig, @RequestBody String payload);
+
+    protected ResponseEntity<Map> doReceiveWebhook(String sig,
+                                                   String payload) {
         log.info("GitHub webhook: Received new webhook request.");
         try {
             log.debug("Computing GitHub SHA-1 hash..");
