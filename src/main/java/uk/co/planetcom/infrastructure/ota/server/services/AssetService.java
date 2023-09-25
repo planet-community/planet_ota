@@ -85,4 +85,18 @@ public class AssetService {
             .filter(Asset::isAvailable)
             .toList();
     }
+
+    public List<Asset> findAllAvailable() {
+        return repository.findAll()
+            .stream()
+            .filter(Asset::isAvailable)
+            .toList();
+    }
+
+    public List<Asset> findAllNotAvailable() {
+        return repository.findAll()
+            .stream()
+            .filter(Asset::isNotAvailable)
+            .toList();
+    }
 }
