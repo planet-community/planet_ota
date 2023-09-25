@@ -33,6 +33,16 @@ public class V1ClientAssetController {
             .orElseThrow();
     }
 
+    @GetMapping(value = "/by/availability/available", produces = V1_API_ACCEPT_HEADER_VALUE)
+    public Collection<Asset> findAllAssetsAvailable() {
+        return assetService.findAllAvailable();
+    }
+
+    @GetMapping(value = "/by/availability/unavailable", produces = V1_API_ACCEPT_HEADER_VALUE)
+    public Collection<Asset> findAllAssetsNotAvailable() {
+        return assetService.findAllNotAvailable();
+    }
+
     @GetMapping(value = "/by/type/{assetType}", produces = V1_API_ACCEPT_HEADER_VALUE)
     public Collection<Asset> findAssetByAssetType(@PathVariable AssetType assetType) {
         return assetService.findAllByAssetType(assetType);
