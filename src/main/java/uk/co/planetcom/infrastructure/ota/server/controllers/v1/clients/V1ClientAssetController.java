@@ -17,7 +17,7 @@ import java.util.UUID;
 import static uk.co.planetcom.infrastructure.ota.server.controllers.v1.V1Constants.V1_API_ACCEPT_HEADER_VALUE;
 
 @RestController
-@RequestMapping("/api/v1/client/assets")
+@RequestMapping("/api/v1/assets")
 public class V1ClientAssetController {
     @Autowired
     private AssetService assetService;
