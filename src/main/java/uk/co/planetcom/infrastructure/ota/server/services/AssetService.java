@@ -31,8 +31,9 @@ public class AssetService {
 
     public void setNewReleaseTimestamp(UUID id, ZonedDateTime newReleaseTimestamp) {
         Asset asset = repository.findById(id)
-            .orElseThrow();
+            .orElseThrow(); // FIXME: handle safely.
         asset.setReleaseTimeStamp(newReleaseTimestamp);
+        // Send out notification if Asset is *now* available.
         repository.saveAndFlush(asset);
     }
 
@@ -46,7 +47,8 @@ public class AssetService {
 
     private void modifySuppressed(UUID id, boolean suppression) {
         Asset asset = repository.findById(id)
-            .orElseThrow();
+            .orElseThrow(); // FIXME: handle safely.
+        // Send out notification if Asset is *now* available.
         asset.setAssetSuppressed(suppression);
         repository.save(asset);
     }
