@@ -25,3 +25,4 @@ jobs:
           with:
               delete_run_by_conclusion_pattern: "skipped"
               retain_days: 1
+              keep_minimum_runs: 1
