@@ -1,14 +1,12 @@
 name: CI container image builder
 
 on:
-  workflow_run:
-    workflows: ["CodeQL workflow"]
-    types: [completed]
+  workflow_call:
 
 jobs:
-  build-agnostos-container-image:
+  build-container-image:
     name: Build and push container image to GHCR
-    if: ${{ github.event.workflow_run.conclusion == 'success' && startsWith(github.ref, 'refs/tags/') }}
+    if: ${{ startsWith(github.ref, 'refs/tags/') && github.repository == 'shymega/planet_ota' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
@@ -21,7 +19,7 @@ jobs:
         uses: redhat-actions/buildah-build@v2.12
         with:
           image: ${{ github.repository }}
-          tags: ${{ contains(github.ref_name, 'main') && 'latest' || github.ref_name }}
+          tags: ${{ github.ref_name }}
           containerfiles: Dockerfile
 
       - name: Push container to GHCR.io

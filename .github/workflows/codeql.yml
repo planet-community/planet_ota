@@ -1,14 +1,11 @@
 name: "CodeQL workflow"
 
 on:
-  workflow_run:
-    workflows: ["CI workflow"]
-    types: [completed]
+  workflow_call:
 
 jobs:
   analyze:
     name: Analyze codebase with CodeQL
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     permissions:
       actions: read
@@ -21,7 +18,6 @@ jobs:
       with:
         submodules: 'recursive'
 
-    # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
