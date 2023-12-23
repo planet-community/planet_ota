@@ -30,6 +30,8 @@ jobs:
       - uses: fastify/github-action-merge-dependabot@v3
         with:
           merge-comment: "Merged automatically by Planet CI."
+          skip-commit-verification: true
+          skip-verification: true
 
   codeql-workflow:
     needs: [automerge]
