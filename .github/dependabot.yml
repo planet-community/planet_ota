@@ -6,6 +6,10 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: "chore(deps)"
+    groups:
+      maven-deps:
+        patterns:
+          - "*"
 
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -13,3 +17,7 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: "chore(ci)"
+    groups:
+      gh-actions-deps:
+        patterns:
+          - "*"
