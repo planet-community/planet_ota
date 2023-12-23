@@ -21,7 +21,6 @@ jobs:
   automerge:
     needs: [build]
     runs-on: ubuntu-latest
-    if: ${{ needs.build.result == 'success' }}
 
     permissions:
       pull-requests: write
@@ -31,3 +30,13 @@ jobs:
       - uses: fastify/github-action-merge-dependabot@v3
         with:
           merge-comment: "Merged automatically by Planet CI."
+
+  codeql-workflow:
+    needs: [automerge]
+    uses: ./.github/workflows/codeql.yml
+    secrets: inherit
+
+  containers:
+    needs: [codeql-workflow]
+    uses: ./.github/workflows/containers.yml
+    secrets: inherit
