@@ -1,0 +1,14 @@
+name: Conventional Commits Verification Workflow
+
+on:
+  pull_request:
+
+jobs:
+  test-pr-commit-msg:
+    name: Test the PR's commit message for compliance with Conventional Commits.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.1.1
+      - uses: webiny/action-conventional-commits@v1.2.0
+        with:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
