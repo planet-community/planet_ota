@@ -95,7 +95,7 @@ public class AssetService {
             .toList();
     }
 
-    public List<Asset> findAllNotAvailable() {
+    public List<Asset> findAllUnavailable() {
         return repository.findAll()
             .stream()
             .filter(Asset::isNotAvailable)
