@@ -12,6 +12,7 @@ import uk.co.planetcom.infrastructure.ota.server.utils.UrlUtils;
 import java.net.MalformedURLException;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -56,6 +57,7 @@ public class AssetService {
     public List<Asset> findAll() {
         return repository.findAll()
             .stream()
+            .filter(Objects::nonNull)
             .filter(Asset::isAvailable)
             .toList();
     }
@@ -63,6 +65,7 @@ public class AssetService {
     public List<Asset> findAllByVendorType(AssetVendor assetVendor) {
         return repository.findAllByAssetVendor(assetVendor)
             .stream()
+            .filter(Objects::nonNull)
             .filter(Asset::isAvailable)
             .toList();
     }
@@ -70,6 +73,7 @@ public class AssetService {
     public Optional<Asset> findByUuid(UUID uuid) {
         return repository.findById(uuid)
             .stream()
+            .filter(Objects::nonNull)
             .filter(Asset::isAvailable)
             .findFirst();
     }
@@ -77,6 +81,7 @@ public class AssetService {
     public List<Asset> findAllByAssetType(AssetType assetType) {
         return repository.findAllByAssetType(assetType)
             .stream()
+            .filter(Objects::nonNull)
             .filter(Asset::isAvailable)
             .toList();
     }
@@ -84,6 +89,7 @@ public class AssetService {
     public List<Asset> findAllByUpdateChannel(UpdateChannel updateChannel) {
         return repository.findAllByUpdateChannel(updateChannel)
             .stream()
+            .filter(Objects::nonNull)
             .filter(Asset::isAvailable)
             .toList();
     }
@@ -91,6 +97,7 @@ public class AssetService {
     public List<Asset> findAllAvailable() {
         return repository.findAll()
             .stream()
+            .filter(Objects::nonNull)
             .filter(Asset::isAvailable)
             .toList();
     }
@@ -98,6 +105,7 @@ public class AssetService {
     public List<Asset> findAllUnavailable() {
         return repository.findAll()
             .stream()
+            .filter(Objects::nonNull)
             .filter(Asset::isNotAvailable)
             .toList();
     }
