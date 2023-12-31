@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.Hidden;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Transient;
 import lombok.Data;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetType;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendor;
@@ -21,23 +22,11 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 public class AssetVO implements Serializable {
-    public AssetVO(Asset o) {
-        this.setAssetId(o.getAssetId());
-        this.setAssetFileName(o.getAssetFileName());
-        this.setAssetVendor(o.getAssetVendor());
-        this.setAssetVersion(o.getAssetVersion());
-        this.setAssetDownloadUri(o.getAssetDownloadUri());
-        this.setAssetChangelog(o.getAssetChangelog());
-        this.setAssetSha256Hash(o.getAssetSha256Hash());
-        this.setReleaseTimeStamp(o.getReleaseTimeStamp());
-        this.setAssetType(o.getAssetType());
-        this.setUpdateChannel(o.getUpdateChannel());
-        this.setAssetCompat(o.getAssetCompat());
-        this.setAssetCryptoSignature(o.getAssetCryptoSignature());
-        this.setAssetSuppressed(o.isAssetSuppressed());
-        this.setUploadTimeStamp(o.getUploadTimeStamp());
-    }
-
+    @Transient
+    @JsonIgnore
+    @Hidden
+    private final ZoneId timeZone = ZoneId.of(Optional.ofNullable(System.getenv("TZ"))
+        .orElse("Europe/London"));
     private UUID assetId; /* UUID/GUID to avoid column collision */
 
     private String assetFileName; /* String representation of the filename that the object was uploaded as. */
@@ -72,11 +61,22 @@ public class AssetVO implements Serializable {
     @JsonIgnore
     private ZonedDateTime uploadTimeStamp;
 
-    @Transient
-    @JsonIgnore
-    @Hidden
-    private final ZoneId timeZone = ZoneId.of(Optional.ofNullable(System.getenv("TZ"))
-        .orElse("Europe/London"));
+    public AssetVO(Asset o) {
+        this.setAssetId(o.getAssetId());
+        this.setAssetFileName(o.getAssetFileName());
+        this.setAssetVendor(o.getAssetVendor());
+        this.setAssetVersion(o.getAssetVersion());
+        this.setAssetDownloadUri(o.getAssetDownloadUri());
+        this.setAssetChangelog(o.getAssetChangelog());
+        this.setAssetSha256Hash(o.getAssetSha256Hash());
+        this.setReleaseTimeStamp(o.getReleaseTimeStamp());
+        this.setAssetType(o.getAssetType());
+        this.setUpdateChannel(o.getUpdateChannel());
+        this.setAssetCompat(o.getAssetCompat());
+        this.setAssetCryptoSignature(o.getAssetCryptoSignature());
+        this.setAssetSuppressed(o.isAssetSuppressed());
+        this.setUploadTimeStamp(o.getUploadTimeStamp());
+    }
 
     @JsonIgnore
     @Hidden

@@ -1,6 +1,5 @@
 package uk.co.planetcom.infrastructure.ota.server.controllers.v1.vendors;
 
-import io.swagger.v3.oas.annotations.Hidden;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

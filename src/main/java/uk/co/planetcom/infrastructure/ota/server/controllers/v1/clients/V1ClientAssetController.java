@@ -9,7 +9,6 @@ import uk.co.planetcom.infrastructure.ota.server.domain.Asset;
 import uk.co.planetcom.infrastructure.ota.server.domain.AssetVO;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetType;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendor;
-import uk.co.planetcom.infrastructure.ota.server.enums.UpdateChannel;
 import uk.co.planetcom.infrastructure.ota.server.services.AssetService;
 
 import java.util.Collection;

@@ -27,7 +27,7 @@ public class CosmoCoDiOSWebhookController extends BaseGitHubWebhookAbstractClass
 
     @Operation(summary = "Process incoming payloads from Cosmo-CoDiOS GitHub webhooks",
         description = "Accept JSON payloads from GitHub (Cosmo-CoDiOS/codid) for new releases, including nightlies.")
-    @ApiResponses(value = { @ApiResponse(responseCode = "202",
+    @ApiResponses(value = {@ApiResponse(responseCode = "202",
         description = "Payload dispatched to event handler."),
         @ApiResponse(responseCode = "401",
             description = "Unauthorized signature. Possible invalid webhook.")})
