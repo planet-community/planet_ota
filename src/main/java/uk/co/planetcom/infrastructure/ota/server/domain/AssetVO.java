@@ -33,6 +33,7 @@ public class AssetVO implements Serializable {
         this.setAssetType(o.getAssetType());
         this.setUpdateChannel(o.getUpdateChannel());
         this.setAssetCompat(o.getAssetCompat());
+        this.setAssetCryptoSignature(o.getAssetCryptoSignature());
         this.setAssetSuppressed(o.isAssetSuppressed());
         this.setUploadTimeStamp(o.getUploadTimeStamp());
     }
@@ -60,6 +61,9 @@ public class AssetVO implements Serializable {
     private UpdateChannel updateChannel; /* Channel that the update is released on. */
 
     private AssetCompat assetCompat;
+
+    @Column(nullable = false)
+    private String assetCryptoSignature;
 
     @Hidden
     @JsonIgnore

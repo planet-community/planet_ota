@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import uk.co.planetcom.infrastructure.ota.server.db.converters.AssetTypeConverter;
@@ -88,6 +89,11 @@ public class Asset implements Serializable {
     @Embedded
     @NotNull
     private AssetCompat assetCompat;
+
+    @Column(nullable = false)
+    @NotNull
+    @NotEmpty
+    private String assetCryptoSignature;
 
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
