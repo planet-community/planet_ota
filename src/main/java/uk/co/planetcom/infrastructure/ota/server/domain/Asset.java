@@ -33,7 +33,7 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "assets")
 // TODO: Javadoc and OpenAPI doc this class.
-public class Asset implements Serializable {
+public final class Asset implements Serializable {
     @Transient
     @JsonIgnore
     @Hidden

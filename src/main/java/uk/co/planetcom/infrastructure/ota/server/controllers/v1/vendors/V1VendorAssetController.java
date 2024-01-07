@@ -22,7 +22,7 @@ import static uk.co.planetcom.infrastructure.ota.server.controllers.v1.V1Constan
 
 @RestController
 @RequestMapping("/api/v1/assets/vendor")
-public class V1VendorAssetController {
+public final class V1VendorAssetController {
     @Autowired
     private AssetService assetService;
 

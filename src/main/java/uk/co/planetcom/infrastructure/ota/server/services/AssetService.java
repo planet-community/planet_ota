@@ -17,7 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class AssetService {
+public final class AssetService {
     @Autowired
     private AssetsRepository repository;
 

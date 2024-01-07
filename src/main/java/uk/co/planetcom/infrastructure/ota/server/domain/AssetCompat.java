@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @Embeddable
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AssetCompat {
+public final class AssetCompat {
     @Embedded
     private CoDiFw compatCoDiFw;
     @Embedded
@@ -26,7 +26,7 @@ public class AssetCompat {
     @AllArgsConstructor
     @NoArgsConstructor
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public static class CoDiFw {
+    public final static class CoDiFw {
         private List<String> resourcesCompatVersions;
         private List<String> ospiCompatVersions;
     }
@@ -37,7 +37,7 @@ public class AssetCompat {
     @AllArgsConstructor
     @NoArgsConstructor
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    public static class AndroidFw {
+    public final static class AndroidFw {
         private List<String> baseBandCompatVersions;
     }
 }

@@ -20,6 +20,7 @@ import static uk.co.planetcom.infrastructure.ota.server.controllers.v1.V1Constan
 @RestController
 @RequestMapping("/api/v1/assets")
 public class V1ClientAssetController {
+public final class V1ClientAssetController {
     @Autowired
     private AssetService assetService;
 

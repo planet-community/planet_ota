@@ -21,7 +21,7 @@ import java.util.UUID;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
-public class AssetVO implements Serializable {
+public final class AssetVO implements Serializable {
     @Transient
     @JsonIgnore
     @Hidden

@@ -17,6 +17,7 @@ import java.util.Map;
 // @Hidden
 @RequestMapping("/api/v1/webhooks/github")
 public class CosmoCoDiOSWebhookController extends BaseGitHubWebhookAbstractClass {
+public final class CosmoCoDiOSWebhookController extends BaseGitHubWebhookAbstractClass {
 
     @Value("${github.webhooks.secrets.codid}")
     private String WEBHOOK_SECRET;
