@@ -1,8 +1,10 @@
 package uk.co.planetcom.infrastructure.ota.server.controllers.webhooks.github.cosmo_codios;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -14,9 +16,9 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-// @Hidden
-@RequestMapping("/api/v1/webhooks/github")
-public class CosmoCoDiOSWebhookController extends BaseGitHubWebhookAbstractClass {
+@Hidden
+@RequestMapping("/api/v1/webhooks/github/cosmo-codios")
+@Tag(name = "Cosmo-CoDiOS webhook controller", description = "Handles Cosmo-CoDiOS GitHub org webhooks")
 public final class CosmoCoDiOSWebhookController extends BaseGitHubWebhookAbstractClass {
 
     @Value("${github.webhooks.secrets.codid}")
