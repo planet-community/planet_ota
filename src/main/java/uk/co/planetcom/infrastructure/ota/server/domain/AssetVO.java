@@ -7,9 +7,7 @@ import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.Column;
 import jakarta.persistence.Transient;
 import lombok.Data;
-import uk.co.planetcom.infrastructure.ota.server.enums.AssetType;
-import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendor;
-import uk.co.planetcom.infrastructure.ota.server.enums.UpdateChannel;
+import uk.co.planetcom.infrastructure.ota.server.enums.*;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -47,11 +45,14 @@ public final class AssetVO implements Serializable {
 
     private AssetType assetType; /* Can be queried from the `AssetService` class. */
 
-    private UpdateChannel updateChannel; /* Channel that the update is released on. */
+    private AssetSubType assetSubType;
+
+    private AssetProduct assetProduct;
+
+    private AssetOS assetOS;
 
     private AssetCompat assetCompat;
 
-    @Column(nullable = false)
     private String assetCryptoSignature;
 
     @Hidden
@@ -71,7 +72,9 @@ public final class AssetVO implements Serializable {
         this.setAssetSha256Hash(o.getAssetSha256Hash());
         this.setReleaseTimeStamp(o.getReleaseTimeStamp());
         this.setAssetType(o.getAssetType());
-        this.setUpdateChannel(o.getUpdateChannel());
+        this.setAssetSubType(o.getAssetSubType());
+        this.setAssetProduct(o.getAssetProduct());
+        this.setAssetOS(o.getAssetOS());
         this.setAssetCompat(o.getAssetCompat());
         this.setAssetCryptoSignature(o.getAssetCryptoSignature());
         this.setAssetSuppressed(o.isAssetSuppressed());

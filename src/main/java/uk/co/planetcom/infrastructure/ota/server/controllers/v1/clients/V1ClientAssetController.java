@@ -83,4 +83,28 @@ public final class V1ClientAssetController {
             .map(AssetVO::new)
             .collect(Collectors.toList())); // FIXME: Dangerous - handle errors with try/catch.
     }
+
+    @GetMapping(value = "/by/product/{productType}", produces = V1_API_ACCEPT_HEADER_VALUE)
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Successful operation"),
+        @ApiResponse(responseCode = "500", description = "Operation encountered internal error.")
+    })
+    public ResponseEntity<Collection<AssetVO>> findAssetByProduct(@PathVariable AssetProduct productType) {
+        return ResponseEntity.ok(assetService.findAllByProduct(productType)
+            .stream()
+            .map(AssetVO::new)
+            .collect(Collectors.toList())); // FIXME: Dangerous - handle errors with try/catch.
+    }
+
+    @GetMapping(value = "/by/subtype/{subType}", produces = V1_API_ACCEPT_HEADER_VALUE)
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Successful operation"),
+        @ApiResponse(responseCode = "500", description = "Operation encountered internal error.")
+    })
+    public ResponseEntity<Collection<AssetVO>> findAssetByAssetSubType(@PathVariable AssetSubType subType) {
+        return ResponseEntity.ok(assetService.findAllByAssetSubType(subType)
+            .stream()
+            .map(AssetVO::new)
+            .collect(Collectors.toList())); // FIXME: Dangerous - handle errors with try/catch.
+    }
 }

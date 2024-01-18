@@ -2,11 +2,11 @@ package uk.co.planetcom.infrastructure.ota.server.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.extern.slf4j.Slf4j;
 import uk.co.planetcom.infrastructure.ota.server.db.AssetsRepository;
 import uk.co.planetcom.infrastructure.ota.server.domain.Asset;
-import uk.co.planetcom.infrastructure.ota.server.enums.AssetType;
-import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendor;
-import uk.co.planetcom.infrastructure.ota.server.enums.UpdateChannel;
+import uk.co.planetcom.infrastructure.ota.server.enums.*;
 import uk.co.planetcom.infrastructure.ota.server.utils.UrlUtils;
 
 import java.net.MalformedURLException;
@@ -17,6 +17,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Slf4j
 public final class AssetService {
     @Autowired
     private AssetsRepository repository;
@@ -86,8 +87,15 @@ public final class AssetService {
             .toList();
     }
 
-    public List<Asset> findAllByUpdateChannel(UpdateChannel updateChannel) {
-        return repository.findAllByUpdateChannel(updateChannel)
+    public List<Asset> findAllByAssetSubType(AssetSubType assetSubType) {
+        return repository.findAllByAssetSubType(assetSubType)
+            .stream()
+            .filter(Objects::nonNull)
+            .filter(Asset::isAvailable)
+            .toList();
+    }
+    public List<Asset> findAllByProduct(AssetProduct assetProduct) {
+        return repository.findAllByAssetProduct(assetProduct)
             .stream()
             .filter(Objects::nonNull)
             .filter(Asset::isAvailable)

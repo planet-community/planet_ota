@@ -9,12 +9,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import uk.co.planetcom.infrastructure.ota.server.db.converters.AssetTypeConverter;
-import uk.co.planetcom.infrastructure.ota.server.db.converters.AssetVendorConverter;
-import uk.co.planetcom.infrastructure.ota.server.db.converters.UpdateChannelConverter;
-import uk.co.planetcom.infrastructure.ota.server.enums.AssetType;
-import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendor;
-import uk.co.planetcom.infrastructure.ota.server.enums.UpdateChannel;
+import uk.co.planetcom.infrastructure.ota.server.db.converters.*;
+import uk.co.planetcom.infrastructure.ota.server.enums.*;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -76,10 +72,22 @@ public final class Asset implements Serializable {
     @Column(nullable = false)
     @NotNull
     private AssetType assetType; /* Can be queried from the `AssetService` class. */
-    @Convert(converter = UpdateChannelConverter.class)
+
+    @Convert(converter = AssetSubTypeConverter.class)
     @Column(nullable = false)
     @NotNull
-    private UpdateChannel updateChannel; /* Channel that the update is released on. */
+    private AssetSubType assetSubType;
+
+    @Convert(converter = AssetProductConverter.class)
+    @Column(nullable = false)
+    @NotNull
+    private AssetProduct assetProduct;
+
+    @Convert(converter = AssetOSConverter.class)
+    @Column(nullable = false)
+    @NotNull
+    private AssetOS assetOS;
+
     @Column(nullable = false)
     @Embedded
     @NotNull
