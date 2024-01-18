@@ -101,15 +101,18 @@ public final class Asset implements Serializable {
     @Embedded
     @NotNull
     private AssetCompat assetCompat;
-    @Column(nullable = false)
+
+    @Column(nullable = false) // TODO: Look into way to valid origin.
     @NotNull
     @NotEmpty
     private String assetCryptoSignature;
+
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
     @Hidden
     // By default, not suppressed.
     private boolean assetSuppressed; /* Whenever the asset has been suppressed, for whatever reason. */
+
     @NotNull
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
