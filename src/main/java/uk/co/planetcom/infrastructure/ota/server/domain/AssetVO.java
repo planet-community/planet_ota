@@ -25,6 +25,7 @@ public final class AssetVO implements Serializable {
     @Hidden
     private final ZoneId timeZone = ZoneId.of(Optional.ofNullable(System.getenv("TZ"))
         .orElse("Europe/London"));
+
     private UUID assetId; /* UUID/GUID to avoid column collision */
 
     private String assetFileName; /* String representation of the filename that the object was uploaded as. */
