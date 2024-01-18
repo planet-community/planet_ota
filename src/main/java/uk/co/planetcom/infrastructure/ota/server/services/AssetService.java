@@ -36,7 +36,12 @@ public final class AssetService {
             .orElseThrow(); // FIXME: handle safely.
         asset.setReleaseTimeStamp(newReleaseTimestamp);
         // Send out notification if Asset is *now* available.
+        if (asset.isAvailable()) notifyDevices(asset);
         repository.saveAndFlush(asset);
+    }
+
+    private void notifyDevices(Asset o) {
+        log.info("Asset updated, and now available. Begin fan-out notify.");
     }
 
     public void suppressAsset(UUID id) {
@@ -52,7 +57,9 @@ public final class AssetService {
             .orElseThrow(); // FIXME: handle safely.
         // Send out notification if Asset is *now* available.
         asset.setAssetSuppressed(suppression);
-        repository.save(asset);
+
+        if (asset.isAvailable()) notifyDevices(asset);
+        repository.saveAndFlush(asset);
     }
 
     public List<Asset> findAll() {
