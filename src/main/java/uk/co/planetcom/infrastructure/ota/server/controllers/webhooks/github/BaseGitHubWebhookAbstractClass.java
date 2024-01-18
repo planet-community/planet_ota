@@ -22,9 +22,9 @@ public abstract class BaseGitHubWebhookAbstractClass {
 
     protected abstract void dispatch();
 
-    public abstract ResponseEntity<Map> receiveWebhook(@RequestHeader("X-Hub-Signature") String sig, @RequestBody String payload);
+    public abstract ResponseEntity<Map<String, ?>> receiveWebhook(@RequestHeader("X-Hub-Signature") String sig, @RequestBody String payload);
 
-    protected ResponseEntity<Map> doReceiveWebhook(String sig,
+    protected ResponseEntity<Map<String, ?>> doReceiveWebhook(String sig,
                                                    String payload) {
         log.info("GitHub webhook: Received new webhook request.");
         try {

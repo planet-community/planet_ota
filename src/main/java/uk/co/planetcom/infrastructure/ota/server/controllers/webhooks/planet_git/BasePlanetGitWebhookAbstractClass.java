@@ -19,8 +19,8 @@ public abstract class BasePlanetGitWebhookAbstractClass {
 
     protected abstract void dispatch();
 
-    public abstract ResponseEntity<Map<String, String>> receiveWebhook(@RequestHeader("X-Signature") String sig, @RequestBody String payload);
-    protected ResponseEntity<Map<String, String>> doReceiveWebhook(String sig,
+    public abstract ResponseEntity<Map<String, ?>> receiveWebhook(@RequestHeader("X-Signature") String sig, @RequestBody String payload);
+    protected ResponseEntity<Map<String, ?>> doReceiveWebhook(String sig,
                                                    String payload) {
         // TODO: Validate signature.
 

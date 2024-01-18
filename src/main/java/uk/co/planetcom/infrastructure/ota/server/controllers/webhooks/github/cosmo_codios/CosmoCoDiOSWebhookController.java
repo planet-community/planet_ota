@@ -36,7 +36,7 @@ public final class CosmoCoDiOSWebhookController extends BaseGitHubWebhookAbstrac
             description = "Unauthorized signature. Possible invalid webhook.")})
     @Override
     @PostMapping(value = "/codid", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map> receiveWebhook(@RequestHeader("X-Hub-Signature") String sig, @RequestBody String payload) {
+    public ResponseEntity<Map<String, ?>> receiveWebhook(@RequestHeader("X-Hub-Signature") String sig, @RequestBody String payload) {
         return super.doReceiveWebhook(sig, payload);
     }
 }
