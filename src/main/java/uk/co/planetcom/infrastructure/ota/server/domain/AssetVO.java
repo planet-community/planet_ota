@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.Hidden;
-import jakarta.persistence.Column;
 import jakarta.persistence.Transient;
 import lombok.Data;
 import uk.co.planetcom.infrastructure.ota.server.enums.*;
@@ -30,7 +29,7 @@ public final class AssetVO implements Serializable {
 
     private String assetFileName; /* String representation of the filename that the object was uploaded as. */
 
-    private AssetVendor assetVendor; /* Vendor of Asset. */
+    private AssetVendorEnum assetVendorEnum; /* Vendor of Asset. */
 
     private String assetVersion; /* Arbitrary String denoting the version of the Asset */
 
@@ -44,13 +43,13 @@ public final class AssetVO implements Serializable {
     @Hidden
     private ZonedDateTime releaseTimeStamp; /* When the asset is 'due' to be released to users. */
 
-    private AssetType assetType; /* Can be queried from the `AssetService` class. */
+    private AssetTypeEnum assetTypeEnum; /* Can be queried from the `AssetService` class. */
 
-    private AssetSubType assetSubType;
+    private AssetSubTypeEnum assetSubTypeEnum;
 
-    private AssetProduct assetProduct;
+    private AssetProductEnum assetProductEnum;
 
-    private AssetOS assetOS;
+    private AssetOSEnum assetOSEnum;
 
     private AssetCompat assetCompat;
 
@@ -66,16 +65,16 @@ public final class AssetVO implements Serializable {
     public AssetVO(Asset o) {
         this.setAssetId(o.getAssetId());
         this.setAssetFileName(o.getAssetFileName());
-        this.setAssetVendor(o.getAssetVendor());
+        this.setAssetVendorEnum(o.getAssetVendorEnum());
         this.setAssetVersion(o.getAssetVersion());
         this.setAssetDownloadUri(o.getAssetDownloadUri());
         this.setAssetChangelog(o.getAssetChangelog());
         this.setAssetSha256Hash(o.getAssetSha256Hash());
         this.setReleaseTimeStamp(o.getReleaseTimeStamp());
-        this.setAssetType(o.getAssetType());
-        this.setAssetSubType(o.getAssetSubType());
-        this.setAssetProduct(o.getAssetProduct());
-        this.setAssetOS(o.getAssetOS());
+        this.setAssetTypeEnum(o.getAssetTypeEnum());
+        this.setAssetSubTypeEnum(o.getAssetSubTypeEnum());
+        this.setAssetProductEnum(o.getAssetProductEnum());
+        this.setAssetOSEnum(o.getAssetOSEnum());
         this.setAssetCompat(o.getAssetCompat());
         this.setAssetCryptoSignature(o.getAssetCryptoSignature());
         this.setAssetSuppressed(o.isAssetSuppressed());

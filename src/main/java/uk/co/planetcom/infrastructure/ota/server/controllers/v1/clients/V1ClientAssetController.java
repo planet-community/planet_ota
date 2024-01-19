@@ -13,10 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.co.planetcom.infrastructure.ota.server.domain.AssetVO;
-import uk.co.planetcom.infrastructure.ota.server.enums.AssetProduct;
-import uk.co.planetcom.infrastructure.ota.server.enums.AssetSubType;
-import uk.co.planetcom.infrastructure.ota.server.enums.AssetType;
-import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendor;
+import uk.co.planetcom.infrastructure.ota.server.enums.AssetProductEnum;
+import uk.co.planetcom.infrastructure.ota.server.enums.AssetSubTypeEnum;
+import uk.co.planetcom.infrastructure.ota.server.enums.AssetTypeEnum;
+import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendorEnum;
 import uk.co.planetcom.infrastructure.ota.server.services.AssetService;
 
 import java.time.Duration;
@@ -109,13 +109,13 @@ public final class V1ClientAssetController {
             .collect(Collectors.toList())); // FIXME: Dangerous - handle errors with try/catch.
     }
 
-    @GetMapping(value = "/by/type/{assetType}", produces = V1_API_ACCEPT_HEADER_VALUE)
+    @GetMapping(value = "/by/type/{assetTypeEnum}", produces = V1_API_ACCEPT_HEADER_VALUE)
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successful operation"),
         @ApiResponse(responseCode = "500", description = "Operation encountered internal error.")
     })
-    public ResponseEntity<Collection<AssetVO>> findAssetByAssetType(@PathVariable AssetType assetType) {
-        return ResponseEntity.ok(assetService.findAllByAssetType(assetType)
+    public ResponseEntity<Collection<AssetVO>> findAssetByAssetType(@PathVariable AssetTypeEnum assetTypeEnum) {
+        return ResponseEntity.ok(assetService.findAllByAssetType(assetTypeEnum)
             .stream()
             .map(AssetVO::new)
             .collect(Collectors.toList())); // FIXME: Dangerous - handle errors with try/catch.
@@ -126,7 +126,7 @@ public final class V1ClientAssetController {
         @ApiResponse(responseCode = "200", description = "Successful operation"),
         @ApiResponse(responseCode = "500", description = "Operation encountered internal error.")
     })
-    public ResponseEntity<Collection<AssetVO>> findAssetByVendor(@PathVariable AssetVendor vendorType) {
+    public ResponseEntity<Collection<AssetVO>> findAssetByVendor(@PathVariable AssetVendorEnum vendorType) {
         return ResponseEntity.ok(assetService.findAllByVendorType(vendorType)
             .stream()
             .map(AssetVO::new)
@@ -138,7 +138,7 @@ public final class V1ClientAssetController {
         @ApiResponse(responseCode = "200", description = "Successful operation"),
         @ApiResponse(responseCode = "500", description = "Operation encountered internal error.")
     })
-    public ResponseEntity<Collection<AssetVO>> findAssetByProduct(@PathVariable AssetProduct productType) {
+    public ResponseEntity<Collection<AssetVO>> findAssetByProduct(@PathVariable AssetProductEnum productType) {
         return ResponseEntity.ok(assetService.findAllByProduct(productType)
             .stream()
             .map(AssetVO::new)
@@ -150,7 +150,7 @@ public final class V1ClientAssetController {
         @ApiResponse(responseCode = "200", description = "Successful operation"),
         @ApiResponse(responseCode = "500", description = "Operation encountered internal error.")
     })
-    public ResponseEntity<Collection<AssetVO>> findAssetByAssetSubType(@PathVariable AssetSubType subType) {
+    public ResponseEntity<Collection<AssetVO>> findAssetByAssetSubType(@PathVariable AssetSubTypeEnum subType) {
         return ResponseEntity.ok(assetService.findAllByAssetSubType(subType)
             .stream()
             .map(AssetVO::new)

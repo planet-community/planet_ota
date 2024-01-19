@@ -50,8 +50,8 @@ public final class Asset implements Serializable {
 
     @NotNull
     @Column(nullable = false)
-    @Convert(converter = AssetVendorConverter.class)
-    private AssetVendor assetVendor; /* Vendor of Asset. */
+    @Convert(converter = AssetVendorEnumConverter.class)
+    private AssetVendorEnum assetVendorEnum; /* Vendor of Asset. */
 
     @NotNull
     @NotBlank
@@ -77,25 +77,25 @@ public final class Asset implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
     private ZonedDateTime releaseTimeStamp; /* When the asset is 'due' to be released to users. */
 
-    @Convert(converter = AssetTypeConverter.class)
+    @Convert(converter = AssetTypeEnumConverter.class)
     @Column(nullable = false)
     @NotNull
-    private AssetType assetType; /* Can be queried from the `AssetService` class. */
+    private AssetTypeEnum assetTypeEnum; /* Can be queried from the `AssetService` class. */
 
-    @Convert(converter = AssetSubTypeConverter.class)
+    @Convert(converter = AssetSubTypeEnumConverter.class)
     @Column(nullable = false)
     @NotNull
-    private AssetSubType assetSubType;
+    private AssetSubTypeEnum assetSubTypeEnum;
 
-    @Convert(converter = AssetProductConverter.class)
+    @Convert(converter = AssetProductEnumConverter.class)
     @Column(nullable = false)
     @NotNull
-    private AssetProduct assetProduct;
+    private AssetProductEnum assetProductEnum;
 
-    @Convert(converter = AssetOSConverter.class)
+    @Convert(converter = AssetOSEnumConverter.class)
     @Column(nullable = false)
     @NotNull
-    private AssetOS assetOS;
+    private AssetOSEnum assetOSEnum;
 
     @Column(nullable = false)
     @Embedded

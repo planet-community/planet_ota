@@ -70,8 +70,8 @@ public final class AssetService {
             .toList();
     }
 
-    public List<Asset> findAllByVendorType(AssetVendor assetVendor) {
-        return repository.findAllByAssetVendor(assetVendor)
+    public List<Asset> findAllByVendorType(AssetVendorEnum assetVendorEnum) {
+        return repository.findAllByAssetVendor(assetVendorEnum)
             .stream()
             .filter(Objects::nonNull)
             .filter(Asset::isAvailable)
@@ -86,23 +86,23 @@ public final class AssetService {
             .findFirst();
     }
 
-    public List<Asset> findAllByAssetType(AssetType assetType) {
-        return repository.findAllByAssetType(assetType)
+    public List<Asset> findAllByAssetType(AssetTypeEnum assetTypeEnum) {
+        return repository.findAllByAssetType(assetTypeEnum)
             .stream()
             .filter(Objects::nonNull)
             .filter(Asset::isAvailable)
             .toList();
     }
 
-    public List<Asset> findAllByAssetSubType(AssetSubType assetSubType) {
-        return repository.findAllByAssetSubType(assetSubType)
+    public List<Asset> findAllByAssetSubType(AssetSubTypeEnum assetSubTypeEnum) {
+        return repository.findAllByAssetSubType(assetSubTypeEnum)
             .stream()
             .filter(Objects::nonNull)
             .filter(Asset::isAvailable)
             .toList();
     }
-    public List<Asset> findAllByProduct(AssetProduct assetProduct) {
-        return repository.findAllByAssetProduct(assetProduct)
+    public List<Asset> findAllByProduct(AssetProductEnum assetProductEnum) {
+        return repository.findAllByAssetProduct(assetProductEnum)
             .stream()
             .filter(Objects::nonNull)
             .filter(Asset::isAvailable)

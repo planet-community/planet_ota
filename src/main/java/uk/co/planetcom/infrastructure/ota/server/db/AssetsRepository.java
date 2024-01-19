@@ -8,10 +8,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface AssetsRepository extends JpaRepository<Asset, UUID> {
-    List<Asset> findAllByAssetType(AssetType assetType);
-
-    List<Asset> findAllByAssetVendor(AssetVendor assetVendor);
-
-    List<Asset> findAllByAssetProduct(AssetProduct assetProduct);
-    List<Asset> findAllByAssetSubType(AssetSubType assetSubType);
+    List<Asset> findAllByAssetType(AssetTypeEnum assetTypeEnum);
+    List<Asset> findAllByAssetVendor(AssetVendorEnum assetVendorEnum);
+    List<Asset> findAllByAssetProduct(AssetProductEnum assetProductEnum);
+    List<Asset> findAllByAssetSubType(AssetSubTypeEnum assetSubTypeEnum);
+    List<Asset> findAllByQuirkEnablement(List<AssetProductQuirkEnum> quirkEnums);
 }
