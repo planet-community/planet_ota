@@ -9,5 +9,4 @@ public enum AssetOSEnum {
     POSTMARKETOS,
     DROIDIAN,
     RECOVERY,
-
 }
