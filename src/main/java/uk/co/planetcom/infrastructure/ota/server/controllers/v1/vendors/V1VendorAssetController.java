@@ -23,7 +23,7 @@ import static uk.co.planetcom.infrastructure.ota.server.controllers.v1.V1Constan
 @RequestMapping("/api/v1/assets/vendor")
 public final class V1VendorAssetController {
     @Autowired
-    private final AssetService assetService;
+    private AssetService assetService;
 
     /* should be auth'd */
     @DeleteMapping(value = "/by/uuid/{uuid}", produces = V1_API_ACCEPT_HEADER_VALUE)

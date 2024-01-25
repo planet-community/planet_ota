@@ -20,7 +20,7 @@ import java.util.UUID;
 @Slf4j
 public final class AssetService {
     @Autowired
-    private final AssetsRepository repository;
+    private AssetsRepository repository;
 
     public final Asset create(final Asset entity) throws MalformedURLException {
         entity.setAssetFileName(UrlUtils.getUrlFileName(entity.getAssetDownloadUri().toString()));

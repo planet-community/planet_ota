@@ -22,7 +22,7 @@ import java.util.Map;
 public final class CosmoCoDiOSWebhookController extends BaseGitHubWebhookAbstractClass {
 
     @Value("${github.webhooks.secrets.codid}")
-    private final String WEBHOOK_SECRET;
+    private String WEBHOOK_SECRET;
 
     @Override
     protected final void dispatch() {
