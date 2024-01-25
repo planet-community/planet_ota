@@ -20,18 +20,18 @@ import java.util.UUID;
 @Slf4j
 public final class AssetService {
     @Autowired
-    private AssetsRepository repository;
+    private final AssetsRepository repository;
 
-    public Asset create(Asset entity) throws MalformedURLException {
+    public final Asset create(final Asset entity) throws MalformedURLException {
         entity.setAssetFileName(UrlUtils.getUrlFileName(entity.getAssetDownloadUri().toString()));
         return repository.saveAndFlush(entity);
     }
 
-    public void delete(Asset entity) {
+    public final void delete(final Asset entity) {
         repository.delete(entity);
     }
 
-    public void setNewReleaseTimestamp(UUID id, ZonedDateTime newReleaseTimestamp) {
+    public final void setNewReleaseTimestamp(final UUID id, final ZonedDateTime newReleaseTimestamp) {
         Asset asset = repository.findById(id)
             .orElseThrow(); // FIXME: handle safely.
         asset.setReleaseTimeStamp(newReleaseTimestamp);
@@ -40,19 +40,19 @@ public final class AssetService {
         repository.saveAndFlush(asset);
     }
 
-    private void notifyDevices(Asset o) {
+    private final void notifyDevices(final Asset o) {
         log.info("Asset updated, and now available. Begin fan-out notify.");
     }
 
-    public void suppressAsset(UUID id) {
+    public final void suppressAsset(final UUID id) {
         modifySuppressed(id, true);
     }
 
-    public void deSuppressAsset(UUID id) {
+    public final void deSuppressAsset(final UUID id) {
         modifySuppressed(id, false);
     }
 
-    private void modifySuppressed(UUID id, boolean suppression) {
+    private final void modifySuppressed(final UUID id, final boolean suppression) {
         Asset asset = repository.findById(id)
             .orElseThrow(); // FIXME: handle safely.
         // Send out notification if Asset is *now* available.
@@ -62,7 +62,7 @@ public final class AssetService {
         repository.saveAndFlush(asset);
     }
 
-    public List<Asset> findAll() {
+    public final List<Asset> findAll() {
         return repository.findAll()
             .stream()
             .filter(Objects::nonNull)
@@ -70,7 +70,7 @@ public final class AssetService {
             .toList();
     }
 
-    public List<Asset> findAllByVendorType(AssetVendorEnum assetVendorEnum) {
+    public final List<Asset> findAllByVendorType(final AssetVendorEnum assetVendorEnum) {
         return repository.findAllByAssetVendor(assetVendorEnum)
             .stream()
             .filter(Objects::nonNull)
@@ -78,7 +78,7 @@ public final class AssetService {
             .toList();
     }
 
-    public Optional<Asset> findByUuid(UUID uuid) {
+    public final Optional<Asset> findByUuid(final UUID uuid) {
         return repository.findById(uuid)
             .stream()
             .filter(Objects::nonNull)
@@ -86,30 +86,7 @@ public final class AssetService {
             .findFirst();
     }
 
-    public List<Asset> findAllByAssetType(AssetTypeEnum assetTypeEnum) {
-        return repository.findAllByAssetType(assetTypeEnum)
-            .stream()
-            .filter(Objects::nonNull)
-            .filter(Asset::isAvailable)
-            .toList();
-    }
-
-    public List<Asset> findAllByAssetSubType(AssetSubTypeEnum assetSubTypeEnum) {
-        return repository.findAllByAssetSubType(assetSubTypeEnum)
-            .stream()
-            .filter(Objects::nonNull)
-            .filter(Asset::isAvailable)
-            .toList();
-    }
-    public List<Asset> findAllByProduct(AssetProductEnum assetProductEnum) {
-        return repository.findAllByAssetProduct(assetProductEnum)
-            .stream()
-            .filter(Objects::nonNull)
-            .filter(Asset::isAvailable)
-            .toList();
-    }
-
-    public List<Asset> findAllAvailable() {
+    public final List<Asset> findAllAvailable() {
         return repository.findAll()
             .stream()
             .filter(Objects::nonNull)
@@ -117,7 +94,7 @@ public final class AssetService {
             .toList();
     }
 
-    public List<Asset> findAllUnavailable() {
+    public final List<Asset> findAllUnavailable() {
         return repository.findAll()
             .stream()
             .filter(Objects::nonNull)

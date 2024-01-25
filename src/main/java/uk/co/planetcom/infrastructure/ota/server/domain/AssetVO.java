@@ -62,7 +62,7 @@ public final class AssetVO implements Serializable {
     @JsonIgnore
     private ZonedDateTime uploadTimeStamp;
 
-    public AssetVO(Asset o) {
+    public AssetVO(final Asset o) {
         this.setAssetId(o.getAssetId());
         this.setAssetFileName(o.getAssetFileName());
         this.setAssetVendorEnum(o.getAssetVendorEnum());

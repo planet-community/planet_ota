@@ -29,7 +29,7 @@ public abstract class BaseGitHubWebhookAbstractClass {
         log.info("GitHub webhook: Received new webhook request.");
         try {
             log.debug("Computing GitHub SHA-1 hash..");
-            byte[] computedHash = String.format("sha1=%s", new HmacUtils(HmacAlgorithms.HMAC_SHA_1,
+            final byte[] computedHash = String.format("sha1=%s", new HmacUtils(HmacAlgorithms.HMAC_SHA_1,
                     WEBHOOK_SECRET.getBytes()).hmacHex(payload.getBytes()))
                 .getBytes();
 

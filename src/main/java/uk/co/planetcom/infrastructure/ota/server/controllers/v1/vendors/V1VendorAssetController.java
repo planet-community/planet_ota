@@ -23,11 +23,11 @@ import static uk.co.planetcom.infrastructure.ota.server.controllers.v1.V1Constan
 @RequestMapping("/api/v1/assets/vendor")
 public final class V1VendorAssetController {
     @Autowired
-    private AssetService assetService;
+    private final AssetService assetService;
 
     /* should be auth'd */
     @DeleteMapping(value = "/by/uuid/{uuid}", produces = V1_API_ACCEPT_HEADER_VALUE)
-    public ResponseEntity<Object> deleteAssetByUuid(@PathVariable UUID uuid) {
+    public final ResponseEntity<Object> deleteAssetByUuid(@PathVariable UUID uuid) {
         assetService.delete(assetService.findByUuid(uuid).orElseThrow());
         return ResponseEntity.noContent().build();
     }

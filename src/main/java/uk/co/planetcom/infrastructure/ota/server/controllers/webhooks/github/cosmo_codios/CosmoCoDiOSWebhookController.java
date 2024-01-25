@@ -22,10 +22,10 @@ import java.util.Map;
 public final class CosmoCoDiOSWebhookController extends BaseGitHubWebhookAbstractClass {
 
     @Value("${github.webhooks.secrets.codid}")
-    private String WEBHOOK_SECRET;
+    private final String WEBHOOK_SECRET;
 
     @Override
-    protected void dispatch() {
+    protected final void dispatch() {
     }
 
     @Operation(summary = "Process incoming payloads from Cosmo-CoDiOS GitHub webhooks",
@@ -36,7 +36,7 @@ public final class CosmoCoDiOSWebhookController extends BaseGitHubWebhookAbstrac
             description = "Unauthorized signature. Possible invalid webhook.")})
     @Override
     @PostMapping(value = "/codid", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Map<String, ?>> receiveWebhook(@RequestHeader("X-Hub-Signature") String sig, @RequestBody String payload) {
+    public final ResponseEntity<Map<String, ?>> receiveWebhook(@RequestHeader("X-Hub-Signature") String sig, @RequestBody String payload) {
         return super.doReceiveWebhook(sig, payload);
     }
 }
