@@ -43,13 +43,7 @@ public final class AssetVO implements Serializable {
     @Hidden
     private ZonedDateTime releaseTimeStamp; /* When the asset is 'due' to be released to users. */
 
-    private AssetTypeEnum assetTypeEnum; /* Can be queried from the `AssetService` class. */
-
-    private AssetSubTypeEnum assetSubTypeEnum;
-
-    private AssetProductEnum assetProductEnum;
-
-    private AssetOSEnum assetOSEnum;
+    private AssetProduct assetProduct;
 
     private AssetCompat assetCompat;
 
@@ -71,10 +65,7 @@ public final class AssetVO implements Serializable {
         this.setAssetChangelog(o.getAssetChangelog());
         this.setAssetSha256Hash(o.getAssetSha256Hash());
         this.setReleaseTimeStamp(o.getReleaseTimeStamp());
-        this.setAssetTypeEnum(o.getAssetTypeEnum());
-        this.setAssetSubTypeEnum(o.getAssetSubTypeEnum());
-        this.setAssetProductEnum(o.getAssetProductEnum());
-        this.setAssetOSEnum(o.getAssetOSEnum());
+        this.setAssetProduct(o.getAssetProduct());
         this.setAssetCompat(o.getAssetCompat());
         this.setAssetCryptoSignature(o.getAssetCryptoSignature());
         this.setAssetSuppressed(o.isAssetSuppressed());

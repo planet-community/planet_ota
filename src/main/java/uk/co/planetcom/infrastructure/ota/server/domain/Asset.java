@@ -77,32 +77,17 @@ public final class Asset implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
     private ZonedDateTime releaseTimeStamp; /* When the asset is 'due' to be released to users. */
 
-    @Convert(converter = AssetTypeEnumConverter.class)
     @Column(nullable = false)
+    @Embedded
     @NotNull
-    private AssetTypeEnum assetTypeEnum; /* Can be queried from the `AssetService` class. */
-
-    @Convert(converter = AssetSubTypeEnumConverter.class)
-    @Column(nullable = false)
-    @NotNull
-    private AssetSubTypeEnum assetSubTypeEnum;
-
-    @Convert(converter = AssetProductEnumConverter.class)
-    @Column(nullable = false)
-    @NotNull
-    private AssetProductEnum assetProductEnum;
-
-    @Convert(converter = AssetOSEnumConverter.class)
-    @Column(nullable = false)
-    @NotNull
-    private AssetOSEnum assetOSEnum;
+    private AssetProduct assetProduct;
 
     @Column(nullable = false)
     @Embedded
     @NotNull
     private AssetCompat assetCompat;
 
-    @Column(nullable = false) // TODO: Look into way to valid origin.
+    @Column(nullable = false) // TODO: Look into way to validate origin.
     @NotNull
     @NotEmpty
     private String assetCryptoSignature;
