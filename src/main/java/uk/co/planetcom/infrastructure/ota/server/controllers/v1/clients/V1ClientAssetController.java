@@ -13,9 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.co.planetcom.infrastructure.ota.server.domain.AssetVO;
-import uk.co.planetcom.infrastructure.ota.server.enums.AssetProductEnum;
-import uk.co.planetcom.infrastructure.ota.server.enums.AssetSubTypeEnum;
-import uk.co.planetcom.infrastructure.ota.server.enums.AssetTypeEnum;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendorEnum;
 import uk.co.planetcom.infrastructure.ota.server.services.AssetService;
 
@@ -109,18 +106,6 @@ public final class V1ClientAssetController {
             .collect(Collectors.toList())); // FIXME: Dangerous - handle errors with try/catch.
     }
 
-    @GetMapping(value = "/by/type/{assetTypeEnum}", produces = V1_API_ACCEPT_HEADER_VALUE)
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Successful operation"),
-        @ApiResponse(responseCode = "500", description = "Operation encountered internal error.")
-    })
-    public final ResponseEntity<Collection<AssetVO>> findAssetByAssetType(@PathVariable final AssetTypeEnum assetTypeEnum) {
-        return ResponseEntity.ok(assetService.findAllByAssetType(assetTypeEnum)
-            .stream()
-            .map(AssetVO::new)
-            .collect(Collectors.toList())); // FIXME: Dangerous - handle errors with try/catch.
-    }
-
     @GetMapping(value = "/by/vendor/{vendorType}", produces = V1_API_ACCEPT_HEADER_VALUE)
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successful operation"),
@@ -128,30 +113,6 @@ public final class V1ClientAssetController {
     })
     public final ResponseEntity<Collection<AssetVO>> findAssetByVendor(@PathVariable final AssetVendorEnum vendorType) {
         return ResponseEntity.ok(assetService.findAllByVendorType(vendorType)
-            .stream()
-            .map(AssetVO::new)
-            .collect(Collectors.toList())); // FIXME: Dangerous - handle errors with try/catch.
-    }
-
-    @GetMapping(value = "/by/product/{productType}", produces = V1_API_ACCEPT_HEADER_VALUE)
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Successful operation"),
-        @ApiResponse(responseCode = "500", description = "Operation encountered internal error.")
-    })
-    public final ResponseEntity<Collection<AssetVO>> findAssetByProduct(@PathVariable final AssetProductEnum productType) {
-        return ResponseEntity.ok(assetService.findAllByProduct(productType)
-            .stream()
-            .map(AssetVO::new)
-            .collect(Collectors.toList())); // FIXME: Dangerous - handle errors with try/catch.
-    }
-
-    @GetMapping(value = "/by/subtype/{subType}", produces = V1_API_ACCEPT_HEADER_VALUE)
-    @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Successful operation"),
-        @ApiResponse(responseCode = "500", description = "Operation encountered internal error.")
-    })
-    public final ResponseEntity<Collection<AssetVO>> findAssetByAssetSubType(@PathVariable final AssetSubTypeEnum subType) {
-        return ResponseEntity.ok(assetService.findAllByAssetSubType(subType)
             .stream()
             .map(AssetVO::new)
             .collect(Collectors.toList())); // FIXME: Dangerous - handle errors with try/catch.
