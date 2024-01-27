@@ -75,7 +75,7 @@ public final class AssetVO implements Serializable {
     @JsonIgnore
     @Hidden
     public boolean isAvailable() {
-        return !(this.releaseTimeStamp.isAfter(ZonedDateTime.now(this.timeZone)) && !this.isAssetSuppressed());
+        return (this.releaseTimeStamp.isAfter(ZonedDateTime.now(this.timeZone)) && !this.isAssetSuppressed());
     }
 
     @JsonIgnore

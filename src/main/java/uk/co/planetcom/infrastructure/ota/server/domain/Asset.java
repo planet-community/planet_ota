@@ -107,7 +107,7 @@ public final class Asset implements Serializable {
     @JsonIgnore
     @Hidden
     public boolean isAvailable() {
-        return !(this.releaseTimeStamp.isAfter(ZonedDateTime.now(this.timeZone)) && !this.isAssetSuppressed());
+        return (this.releaseTimeStamp.isAfter(ZonedDateTime.now(this.timeZone)) && !this.isAssetSuppressed());
     }
 
     @Transient
