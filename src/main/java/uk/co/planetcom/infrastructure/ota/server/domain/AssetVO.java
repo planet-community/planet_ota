@@ -29,7 +29,7 @@ public final class AssetVO implements Serializable {
 
     private String assetFileName; /* String representation of the filename that the object was uploaded as. */
 
-    private AssetVendorEnum assetVendorEnum; /* Vendor of Asset. */
+    private AssetVendorEnum assetVendor; /* Vendor of Asset. */
 
     private String assetVersion; /* Arbitrary String denoting the version of the Asset */
 
@@ -59,7 +59,7 @@ public final class AssetVO implements Serializable {
     public AssetVO(final Asset o) {
         this.setAssetId(o.getAssetId());
         this.setAssetFileName(o.getAssetFileName());
-        this.setAssetVendorEnum(o.getAssetVendorEnum());
+        this.setAssetVendor(o.getAssetVendor());
         this.setAssetVersion(o.getAssetVersion());
         this.setAssetDownloadUri(o.getAssetDownloadUri());
         this.setAssetChangelog(o.getAssetChangelog());

@@ -51,7 +51,7 @@ public final class Asset implements Serializable {
     @NotNull
     @Column(nullable = false)
     @Convert(converter = AssetVendorEnumConverter.class)
-    private AssetVendorEnum assetVendorEnum; /* Vendor of Asset. */
+    private AssetVendorEnum assetVendor; /* Vendor of Asset. */
 
     @NotNull
     @NotBlank
