@@ -20,13 +20,16 @@ import java.util.Map;
 @AllArgsConstructor
 public final class AssetProduct {
     @Convert(converter = AssetProductEnumConverter.class)
-    private final AssetProductEnum product;
+    private AssetProductEnum product;
 
     @ElementCollection
     @MapKeyColumn(name="product_quirk_enum")
     @Column(name="product_quirk_enablement")
-    private final Map<AssetProductQuirkEnum, Boolean> productQuirkMap;
+    private Map<AssetProductQuirkEnum, Boolean> productQuirkMap;
 
     @Convert(converter = AssetOSEnumConverter.class)
-    private final AssetOSEnum productOS;
+    private AssetOSEnum productOS;
+
+    @Convert(converter = AssetSubTypeEnumConverter.class)
+    private AssetSubTypeEnum assetSubType;
 }

@@ -17,7 +17,7 @@ public final class V1VendorAssetController {
 
     /* should be auth'd */
     @DeleteMapping(value = "/by/uuid/{uuid}", produces = V1_API_ACCEPT_HEADER_VALUE)
-    public final ResponseEntity<Object> deleteAssetByUuid(@PathVariable UUID uuid) {
+    public ResponseEntity<Object> deleteAssetByUuid(@PathVariable UUID uuid) {
         assetService.delete(assetService.findByUuid(uuid).orElseThrow());
         return ResponseEntity.noContent().build();
     }

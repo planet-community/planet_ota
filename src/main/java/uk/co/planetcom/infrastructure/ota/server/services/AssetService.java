@@ -22,16 +22,16 @@ public final class AssetService {
     @Autowired
     private AssetsRepository repository;
 
-    public final Asset create(final Asset entity) throws MalformedURLException {
+    public Asset create(final Asset entity) throws MalformedURLException {
         entity.setAssetFileName(UrlUtils.getUrlFileName(entity.getAssetDownloadUri().toString()));
         return repository.saveAndFlush(entity);
     }
 
-    public final void delete(final Asset entity) {
+    public void delete(final Asset entity) {
         repository.delete(entity);
     }
 
-    public final void setNewReleaseTimestamp(final UUID id, final ZonedDateTime newReleaseTimestamp) {
+    public void setNewReleaseTimestamp(final UUID id, final ZonedDateTime newReleaseTimestamp) {
         Asset asset = repository.findById(id)
             .orElseThrow(); // FIXME: handle safely.
         asset.setReleaseTimeStamp(newReleaseTimestamp);
@@ -40,19 +40,19 @@ public final class AssetService {
         repository.saveAndFlush(asset);
     }
 
-    private final void notifyDevices(final Asset o) {
+    private void notifyDevices(final Asset o) {
         log.info("Asset updated, and now available. Begin fan-out notify.");
     }
 
-    public final void suppressAsset(final UUID id) {
+    public void suppressAsset(final UUID id) {
         modifySuppressed(id, true);
     }
 
-    public final void deSuppressAsset(final UUID id) {
+    public void deSuppressAsset(final UUID id) {
         modifySuppressed(id, false);
     }
 
-    private final void modifySuppressed(final UUID id, final boolean suppression) {
+    private void modifySuppressed(final UUID id, final boolean suppression) {
         Asset asset = repository.findById(id)
             .orElseThrow(); // FIXME: handle safely.
         // Send out notification if Asset is *now* available.
@@ -62,7 +62,7 @@ public final class AssetService {
         repository.saveAndFlush(asset);
     }
 
-    public final List<Asset> findAll() {
+    public List<Asset> findAll() {
         return repository.findAll()
             .stream()
             .filter(Objects::nonNull)
@@ -70,7 +70,7 @@ public final class AssetService {
             .toList();
     }
 
-    public final List<Asset> findAllByVendorType(final AssetVendorEnum assetVendorEnum) {
+    public List<Asset> findAllByVendorType(final AssetVendorEnum assetVendorEnum) {
         return repository.findAllByAssetVendor(assetVendorEnum)
             .stream()
             .filter(Objects::nonNull)
@@ -78,7 +78,7 @@ public final class AssetService {
             .toList();
     }
 
-    public final Optional<Asset> findByUuid(final UUID uuid) {
+    public Optional<Asset> findByUuid(final UUID uuid) {
         return repository.findById(uuid)
             .stream()
             .filter(Objects::nonNull)
@@ -86,7 +86,7 @@ public final class AssetService {
             .findFirst();
     }
 
-    public final List<Asset> findAllAvailable() {
+    public List<Asset> findAllAvailable() {
         return repository.findAll()
             .stream()
             .filter(Objects::nonNull)
@@ -94,7 +94,7 @@ public final class AssetService {
             .toList();
     }
 
-    public final List<Asset> findAllUnavailable() {
+    public List<Asset> findAllUnavailable() {
         return repository.findAll()
             .stream()
             .filter(Objects::nonNull)

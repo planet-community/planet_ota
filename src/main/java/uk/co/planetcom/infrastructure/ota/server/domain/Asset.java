@@ -33,7 +33,7 @@ public final class Asset implements Serializable {
     @Transient
     @JsonIgnore
     @Hidden
-    private final ZoneId timeZone = ZoneId.of(Optional.ofNullable(System.getenv("TZ"))
+    private ZoneId timeZone = ZoneId.of(Optional.ofNullable(System.getenv("TZ"))
         .orElse("Europe/London"));
 
     @Id

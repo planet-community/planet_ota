@@ -5,7 +5,7 @@ import java.net.URL;
 import java.nio.file.Paths;
 
 public final class UrlUtils {
-    public final static String getUrlFileName(final String url) throws MalformedURLException {
+    public static String getUrlFileName(final String url) throws MalformedURLException {
         try {
             return Paths.get(new URL(url).getPath()).getFileName().toString();
         } catch (MalformedURLException e) {

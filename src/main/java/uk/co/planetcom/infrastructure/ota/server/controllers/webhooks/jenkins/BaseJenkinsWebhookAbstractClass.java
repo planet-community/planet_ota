@@ -12,9 +12,9 @@ import java.util.Map;
 public abstract class BaseJenkinsWebhookAbstractClass {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
-    private final int SIG_LEN = 45;
+    private int SIG_LEN = 45;
 
-    private final String WEBHOOK_SECRET = "";
+    private String WEBHOOK_SECRET = "";
 
     protected abstract void dispatch();
 

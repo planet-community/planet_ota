@@ -22,7 +22,7 @@ public final class AssetVO implements Serializable {
     @Transient
     @JsonIgnore
     @Hidden
-    private final ZoneId timeZone = ZoneId.of(Optional.ofNullable(System.getenv("TZ"))
+    private ZoneId timeZone = ZoneId.of(Optional.ofNullable(System.getenv("TZ"))
         .orElse("Europe/London"));
 
     private UUID assetId; /* UUID/GUID to avoid column collision */
