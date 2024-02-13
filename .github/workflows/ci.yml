@@ -35,7 +35,7 @@ jobs:
           skip-verification: true
 
   codeql-workflow:
-    needs: [automerge]
+    needs: [build]
     uses: ./.github/workflows/codeql.yml
     secrets: inherit
 
