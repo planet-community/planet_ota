@@ -7,9 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import uk.co.planetcom.infrastructure.ota.server.db.converters.AssetOSEnumConverter;
 import uk.co.planetcom.infrastructure.ota.server.db.converters.AssetProductEnumConverter;
+import uk.co.planetcom.infrastructure.ota.server.db.converters.AssetSubTypeEnumConverter;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetOSEnum;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetProductEnum;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetProductQuirkEnum;
+import uk.co.planetcom.infrastructure.ota.server.enums.AssetSubTypeEnum;
 
 import java.util.Map;
 
