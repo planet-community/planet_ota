@@ -6,7 +6,7 @@ on:
 jobs:
   build-container-image:
     name: Build and push container image to GHCR
-    if: ${{ startsWith(github.ref, 'refs/tags/') && github.repository == 'shymega/planet_ota' }}
+    if: ${{ startsWith(github.ref, 'refs/tags/') && github.repository == 'planet-community-org/planet_ota' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout sources
