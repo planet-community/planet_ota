@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.co.planetcom.infrastructure.ota.server.services.AssetService;
 
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 import static uk.co.planetcom.infrastructure.ota.server.controllers.v1.V1Constants.V1_API_ACCEPT_HEADER_VALUE;
@@ -17,9 +18,15 @@ public final class V1VendorAssetController {
 
     /* should be auth'd */
     @DeleteMapping(value = "/by/uuid/{uuid}", produces = V1_API_ACCEPT_HEADER_VALUE)
-    public ResponseEntity<Object> deleteAssetByUuid(@PathVariable UUID uuid) {
-        assetService.delete(assetService.findByUuid(uuid).orElseThrow());
+    public ResponseEntity<Object> deleteAssetByUuid(@PathVariable final UUID uuid,
+                                                    @RequestHeader final String authToken)
+    {
+        try {
+            assetService.delete(assetService.findByUuid(uuid).orElseThrow());
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+        }
+
         return ResponseEntity.noContent().build();
     }
 }
-
