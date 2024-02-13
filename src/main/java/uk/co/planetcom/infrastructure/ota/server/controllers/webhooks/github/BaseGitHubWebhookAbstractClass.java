@@ -44,7 +44,7 @@ public abstract class BaseGitHubWebhookAbstractClass {
                 return new ResponseEntity<>(Collections.singletonMap("errorMessage", "INVALID_SIG"),
                     HttpStatus.UNAUTHORIZED);
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             log.error("We encountered an exception. It's probably an error comparing the hash, but we don't want to tell the client. Return 403.");
             return new ResponseEntity<>(Collections.singletonMap("errorMessage", "INVALID_SIG"),
                 HttpStatus.UNAUTHORIZED);

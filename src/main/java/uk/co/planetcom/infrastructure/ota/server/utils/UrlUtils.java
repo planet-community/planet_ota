@@ -8,7 +8,7 @@ public final class UrlUtils {
     public static String getUrlFileName(final String url) throws MalformedURLException {
         try {
             return Paths.get(new URL(url).getPath()).getFileName().toString();
-        } catch (MalformedURLException e) {
+        } catch (final MalformedURLException e) {
             throw new MalformedURLException("Error getting filename from path.");
         }
     }
