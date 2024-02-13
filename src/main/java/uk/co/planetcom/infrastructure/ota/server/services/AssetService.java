@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import uk.co.planetcom.infrastructure.ota.server.db.AssetsRepository;
 import uk.co.planetcom.infrastructure.ota.server.domain.Asset;
 import uk.co.planetcom.infrastructure.ota.server.enums.*;
+import uk.co.planetcom.infrastructure.ota.server.observers.api.EventSender;
+import uk.co.planetcom.infrastructure.ota.server.observers.events.AssetDeviceNotifyEvent;
 import uk.co.planetcom.infrastructure.ota.server.utils.UrlUtils;
 
 import java.net.MalformedURLException;
@@ -21,6 +23,9 @@ import java.util.UUID;
 public final class AssetService {
     @Autowired
     private AssetsRepository repository;
+
+    @Autowired
+    private EventSender eventSender;
 
     public Asset create(final Asset entity) throws MalformedURLException {
         entity.setAssetFileName(UrlUtils.getUrlFileName(entity.getAssetDownloadUri().toString()));
@@ -41,7 +46,9 @@ public final class AssetService {
     }
 
     private void notifyDevices(final Asset o) {
-        log.info("Asset updated, and now available. Begin fan-out notify.");
+        log.info("Asset updated, and now available. Notifying Observers.");
+        AssetDeviceNotifyEvent evt = new AssetDeviceNotifyEvent(this, o);
+        eventSender.sendAssetDeviceNotifyEvent(evt);
     }
 
     public void suppressAsset(final UUID id) {

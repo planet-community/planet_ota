@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.co.planetcom.infrastructure.ota.server.controllers.webhooks.github.BaseGitHubWebhookAbstractClass;
+import uk.co.planetcom.infrastructure.ota.server.observers.events.GitHubEvent;
 
 import java.util.Map;
 
@@ -25,7 +26,9 @@ public final class CosmoCoDiOSWebhookController extends BaseGitHubWebhookAbstrac
     private String WEBHOOK_SECRET;
 
     @Override
-    protected void dispatch() {
+    protected void dispatch(final String GH_USER_REPO) {
+        GitHubEvent evt = new GitHubEvent(this, GH_USER_REPO);
+        eventSender.sendGitHubEvent(evt);
     }
 
     @Operation(summary = "Process incoming payloads from Cosmo-CoDiOS GitHub webhooks",
@@ -37,6 +40,7 @@ public final class CosmoCoDiOSWebhookController extends BaseGitHubWebhookAbstrac
     @Override
     @PostMapping(value = "/codid", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Map<String, ?>> receiveWebhook(@RequestHeader("X-Hub-Signature") String sig, @RequestBody String payload) {
+        dispatch("Cosmo-CoDiOS/codid");
         return super.doReceiveWebhook(sig, payload);
     }
 }
