@@ -88,7 +88,6 @@ public final class AssetService {
     public Optional<Asset> findByUuid(final UUID uuid) {
         return repository.findById(uuid)
             .stream()
-            .filter(Objects::nonNull)
             .filter(Asset::isAvailable)
             .findFirst();
     }
