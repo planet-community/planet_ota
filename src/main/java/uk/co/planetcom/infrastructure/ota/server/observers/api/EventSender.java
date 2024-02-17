@@ -8,7 +8,7 @@ import uk.co.planetcom.infrastructure.ota.server.observers.events.BaseEvent;
 import uk.co.planetcom.infrastructure.ota.server.observers.events.GitHubEvent;
 
 @Component
-public class EventSender {
+public final class EventSender {
     private final ApplicationEventPublisher eventPublisher;
 
     @Autowired

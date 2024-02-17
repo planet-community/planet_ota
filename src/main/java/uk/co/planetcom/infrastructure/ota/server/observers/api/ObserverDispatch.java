@@ -14,7 +14,7 @@ import java.util.concurrent.Executors;
 
 @Component
 @Slf4j
-public class ObserverDispatch implements ApplicationListener<BaseEvent> {
+public final class ObserverDispatch implements ApplicationListener<BaseEvent> {
     private final ExecutorService executorService = Executors.newFixedThreadPool(10);
 
     @Override

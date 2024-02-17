@@ -5,7 +5,7 @@ import jakarta.persistence.Converter;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendorEnum;
 
 @Converter
-public class AssetVendorEnumConverter implements AttributeConverter<AssetVendorEnum, String> {
+public final class AssetVendorEnumConverter implements AttributeConverter<AssetVendorEnum, String> {
     @Override
     public String convertToDatabaseColumn(final AssetVendorEnum assetVendorEnum) {
         if (assetVendorEnum == null) throw new IllegalArgumentException("Cannot convert to DB column; `AssetVendor` argument is null.");

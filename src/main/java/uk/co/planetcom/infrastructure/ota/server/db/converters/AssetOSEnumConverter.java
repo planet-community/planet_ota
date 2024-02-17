@@ -5,7 +5,7 @@ import jakarta.persistence.Converter;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetOSEnum;
 
 @Converter
-public class AssetOSEnumConverter implements AttributeConverter<AssetOSEnum, String> {
+public final class AssetOSEnumConverter implements AttributeConverter<AssetOSEnum, String> {
     @Override
     public String convertToDatabaseColumn(final AssetOSEnum AssetOSEnum) {
         if (AssetOSEnum == null) throw new IllegalArgumentException("Cannot convert to DB column; `AssetOS` argument is null.");
