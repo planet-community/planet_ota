@@ -95,6 +95,7 @@ public final class Asset implements Serializable {
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
     @Hidden
+    @Builder.Default
     // By default, not suppressed.
     private boolean assetSuppressed = false; /* Whenever the asset has been suppressed, for whatever reason. */
 
