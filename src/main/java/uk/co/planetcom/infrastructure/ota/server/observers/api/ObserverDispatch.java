@@ -23,6 +23,8 @@ public final class ObserverDispatch implements ApplicationListener<BaseEvent> {
             log.debug("Dispatching event: {}", evt.toString());
             if (evt instanceof GitHubEvent) {
                 handleGitHubEvent((GitHubEvent) evt);
+            } if (evt instanceof AssetDeviceNotifyEvent) {
+                handleAssetDeviceNotifyEvent((AssetDeviceNotifyEvent) evt);
             }
         });
     }
