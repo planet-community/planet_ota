@@ -7,4 +7,5 @@ public enum AssetProductQuirkEnum {
     KEYBOARD_QWERTY,
     KEYBOARD_QWERTZ,
     KEYBOARD_ALL,
+    WIFI_ONLY,
 }
