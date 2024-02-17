@@ -37,6 +37,5 @@ public final class ObserverDispatch implements ApplicationListener<BaseEvent> {
     private synchronized void handleAssetDeviceNotifyEvent(final AssetDeviceNotifyEvent evt) {
         log.info("Handling AssetDeviceNotify event: {}", evt.toString());
         // Notify devices.
-        Asset asset = evt.getAsset();
     }
 }
