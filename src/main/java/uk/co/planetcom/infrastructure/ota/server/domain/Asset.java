@@ -96,7 +96,7 @@ public final class Asset implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
     @Hidden
     // By default, not suppressed.
-    private Boolean assetSuppressed = false; /* Whenever the asset has been suppressed, for whatever reason. */
+    private boolean assetSuppressed = false; /* Whenever the asset has been suppressed, for whatever reason. */
 
     @NotNull
     @Column(nullable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
