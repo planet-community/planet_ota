@@ -49,7 +49,7 @@ public final class AssetService {
     private void notifyDevices(final Asset o) {
         log.info("Asset updated, and now available. Notifying Observers.");
         AssetDeviceNotifyEvent evt = new AssetDeviceNotifyEvent(this, o);
-        eventSender.sendAssetDeviceNotifyEvent(evt);
+        eventSender.sendEvent(evt);
     }
 
     public void suppressAsset(final UUID id) {

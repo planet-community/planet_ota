@@ -28,7 +28,7 @@ public final class CosmoCoDiOSWebhookController extends BaseGitHubWebhookAbstrac
     @Override
     protected void dispatch(final String GH_USER_REPO) {
         GitHubEvent evt = new GitHubEvent(this, GH_USER_REPO);
-        eventSender.sendGitHubEvent(evt);
+        eventSender.sendEvent(evt);
     }
 
     @Operation(summary = "Process incoming payloads from Cosmo-CoDiOS GitHub webhooks",
