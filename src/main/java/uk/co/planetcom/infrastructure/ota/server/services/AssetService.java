@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
-import uk.co.planetcom.infrastructure.ota.server.db.AssetsRepository;
+import uk.co.planetcom.infrastructure.ota.server.db.AssetRepository;
 import uk.co.planetcom.infrastructure.ota.server.domain.Asset;
 import uk.co.planetcom.infrastructure.ota.server.enums.*;
 import uk.co.planetcom.infrastructure.ota.server.observers.api.EventSender;
@@ -23,7 +23,7 @@ import java.util.UUID;
 @Slf4j
 public final class AssetService {
     @Autowired
-    private AssetsRepository repository;
+    private AssetRepository repository;
 
     @Autowired
     private EventSender eventSender;
