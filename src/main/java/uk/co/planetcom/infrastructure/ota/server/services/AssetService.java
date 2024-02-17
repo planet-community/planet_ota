@@ -12,6 +12,7 @@ import uk.co.planetcom.infrastructure.ota.server.observers.events.AssetDeviceNot
 import uk.co.planetcom.infrastructure.ota.server.utils.UrlUtils;
 
 import java.net.MalformedURLException;
+import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -36,7 +37,7 @@ public final class AssetService {
         repository.delete(entity);
     }
 
-    public void setNewReleaseTimestamp(final UUID id, final ZonedDateTime newReleaseTimestamp) {
+    public void setNewReleaseTimestamp(final UUID id, final OffsetDateTime newReleaseTimestamp) {
         Asset asset = repository.findById(id)
             .orElseThrow(); // FIXME: handle safely.
         asset.setReleaseTimeStamp(newReleaseTimestamp);

@@ -9,11 +9,16 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import uk.co.planetcom.infrastructure.ota.server.db.converters.*;
 import uk.co.planetcom.infrastructure.ota.server.enums.*;
+import uk.co.planetcom.infrastructure.ota.server.utils.UrlUtils;
 
 import java.io.Serializable;
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.sql.Timestamp;
+import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -30,12 +35,6 @@ import java.util.UUID;
 @Table(name = "assets")
 // TODO: Javadoc and OpenAPI doc this class.
 public final class Asset implements Serializable {
-    @Transient
-    @JsonIgnore
-    @Hidden
-    private ZoneId timeZone = ZoneId.of(Optional.ofNullable(System.getenv("TZ"))
-        .orElse("Europe/London"));
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @NotNull
@@ -73,9 +72,10 @@ public final class Asset implements Serializable {
     private String assetSha256Hash; /* SHA-256 hash of the asset, generate from bytes stored in RDBMS */
 
     @NotNull
-    @Column(nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
-    private ZonedDateTime releaseTimeStamp; /* When the asset is 'due' to be released to users. */
+    @Column(nullable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @JsonIgnore
+    @Hidden
+    private OffsetDateTime releaseTimeStamp; /* When the asset is 'due' to be released to users. */
 
     @Column(nullable = false)
     @Embedded
@@ -96,18 +96,37 @@ public final class Asset implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
     @Hidden
     // By default, not suppressed.
-    private boolean assetSuppressed; /* Whenever the asset has been suppressed, for whatever reason. */
+    private Boolean assetSuppressed = false; /* Whenever the asset has been suppressed, for whatever reason. */
 
     @NotNull
-    @Column(nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
-    private ZonedDateTime uploadTimeStamp = ZonedDateTime.now(timeZone);
+    @Column(nullable = false, columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    @JsonIgnore
+    @Hidden
+    private OffsetDateTime uploadTimeStamp;
+
+    @PrePersist
+    @JsonIgnore
+    @Transient
+    @Hidden
+    void preInsert() {
+        if (this.uploadTimeStamp == null)
+            this.uploadTimeStamp = OffsetDateTime.now();
+
+        if (this.assetFileName == null) {
+            try {
+                this.assetFileName = UrlUtils.getUrlFileName(this.assetDownloadUri.toString());
+            } catch (MalformedURLException e) {
+                // TODO: Return a 500 error.
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
     @Transient
     @JsonIgnore
     @Hidden
     public boolean isAvailable() {
-        return (this.releaseTimeStamp.isAfter(ZonedDateTime.now(this.timeZone)) && !this.isAssetSuppressed());
+        return (this.releaseTimeStamp.isAfter(OffsetDateTime.now()) && !this.isAssetSuppressed());
     }
 
     @Transient

@@ -10,6 +10,7 @@ import uk.co.planetcom.infrastructure.ota.server.enums.*;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -19,12 +20,6 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 public final class AssetVO implements Serializable {
-    @Transient
-    @JsonIgnore
-    @Hidden
-    private ZoneId timeZone = ZoneId.of(Optional.ofNullable(System.getenv("TZ"))
-        .orElse("Europe/London"));
-
     private UUID assetId; /* UUID/GUID to avoid column collision */
 
     private String assetFileName; /* String representation of the filename that the object was uploaded as. */
@@ -41,7 +36,7 @@ public final class AssetVO implements Serializable {
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
     @Hidden
-    private ZonedDateTime releaseTimeStamp; /* When the asset is 'due' to be released to users. */
+    private OffsetDateTime releaseTimeStamp; /* When the asset is 'due' to be released to users. */
 
     private AssetProduct assetProduct;
 
@@ -54,7 +49,7 @@ public final class AssetVO implements Serializable {
     private boolean assetSuppressed; /* Whenever the asset has been suppressed, for whatever reason. */
 
     @JsonIgnore
-    private ZonedDateTime uploadTimeStamp;
+    private OffsetDateTime uploadTimeStamp;
 
     public AssetVO(final Asset o) {
         this.setAssetId(o.getAssetId());
@@ -75,7 +70,7 @@ public final class AssetVO implements Serializable {
     @JsonIgnore
     @Hidden
     public boolean isAvailable() {
-        return (this.releaseTimeStamp.isAfter(ZonedDateTime.now(this.timeZone)) && !this.isAssetSuppressed());
+        return (this.releaseTimeStamp.isAfter(OffsetDateTime.now()) && !this.isAssetSuppressed());
     }
 
     @JsonIgnore
