@@ -1,7 +1,7 @@
 package uk.co.planetcom.infrastructure.ota.server.db;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import uk.co.planetcom.infrastructure.ota.server.domain.Asset;
+import uk.co.planetcom.infrastructure.ota.server.db.entities.Asset;
 import uk.co.planetcom.infrastructure.ota.server.enums.*;
 
 import java.util.List;

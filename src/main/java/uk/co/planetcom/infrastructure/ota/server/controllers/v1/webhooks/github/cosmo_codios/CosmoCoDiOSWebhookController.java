@@ -1,4 +1,4 @@
-package uk.co.planetcom.infrastructure.ota.server.controllers.webhooks.github.cosmo_codios;
+package uk.co.planetcom.infrastructure.ota.server.controllers.v1.webhooks.github.cosmo_codios;
 
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uk.co.planetcom.infrastructure.ota.server.controllers.webhooks.github.BaseGitHubWebhookAbstractClass;
+import uk.co.planetcom.infrastructure.ota.server.controllers.v1.webhooks.github.BaseGitHubWebhookAbstractClass;
 import uk.co.planetcom.infrastructure.ota.server.observers.events.GitHubEvent;
 
 import java.util.Map;

@@ -1,4 +1,4 @@
-package uk.co.planetcom.infrastructure.ota.server.domain;
+package uk.co.planetcom.infrastructure.ota.server.db.entities.embeddables;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Embeddable;

@@ -1,4 +1,4 @@
-package uk.co.planetcom.infrastructure.ota.server.controllers.v1.clients;
+package uk.co.planetcom.infrastructure.ota.server.controllers.v1.apparatuses;
 
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uk.co.planetcom.infrastructure.ota.server.domain.AssetVO;
@@ -21,19 +22,17 @@ import java.util.Collection;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import static uk.co.planetcom.infrastructure.ota.server.controllers.v1.V1Constants.V1_API_ACCEPT_HEADER_VALUE;
-
 @RestController
 @RequestMapping("/api/v1/assets")
 @Slf4j
 @Tag(name = "Client-focused Assets Controller (v1)", description = "REST endpoint for Clients to query Assets")
-public final class V1ClientAssetController {
+public final class ApparatusAssetController {
     @Autowired
     private AssetService assetService;
 
     private Bucket bucket;
 
-    public V1ClientAssetController() {
+    public ApparatusAssetController() {
         Bandwidth limit = Bandwidth.classic(20, Refill.greedy(20, Duration.ofMinutes(1)));
 
         this.bucket = Bucket.builder()
@@ -51,7 +50,7 @@ public final class V1ClientAssetController {
 
     }
 
-    @GetMapping(value = "/", produces = V1_API_ACCEPT_HEADER_VALUE)
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Get all *available* assets", description = "Get a JSON array of all *available* Assets")
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successful operation"),
@@ -64,7 +63,7 @@ public final class V1ClientAssetController {
             .collect(Collectors.toList())); // FIXME: Dangerous - handle errors with try/catch.
     }
 
-    @GetMapping(value = "/by/uuid/{uuid}", produces = V1_API_ACCEPT_HEADER_VALUE)
+    @GetMapping(value = "/by/uuid/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successful operation"),
         @ApiResponse(responseCode = "500", description = "Operation encountered internal error.")
@@ -82,7 +81,7 @@ public final class V1ClientAssetController {
             .build();
     }
 
-    @GetMapping(value = "/by/availability/available", produces = V1_API_ACCEPT_HEADER_VALUE)
+    @GetMapping(value = "/by/availability/available", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successful operation"),
         @ApiResponse(responseCode = "500", description = "Operation encountered internal error.")
@@ -94,7 +93,7 @@ public final class V1ClientAssetController {
             .collect(Collectors.toList())); // FIXME: Dangerous - handle errors with try/catch.
     }
 
-    @GetMapping(value = "/by/availability/unavailable", produces = V1_API_ACCEPT_HEADER_VALUE)
+    @GetMapping(value = "/by/availability/unavailable", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successful operation"),
         @ApiResponse(responseCode = "500", description = "Operation encountered internal error.")
@@ -106,7 +105,7 @@ public final class V1ClientAssetController {
             .collect(Collectors.toList())); // FIXME: Dangerous - handle errors with try/catch.
     }
 
-    @GetMapping(value = "/by/vendor/{vendorType}", produces = V1_API_ACCEPT_HEADER_VALUE)
+    @GetMapping(value = "/by/vendor/{vendorType}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Successful operation"),
         @ApiResponse(responseCode = "500", description = "Operation encountered internal error.")

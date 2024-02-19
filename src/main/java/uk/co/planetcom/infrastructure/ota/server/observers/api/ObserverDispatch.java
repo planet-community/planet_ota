@@ -3,8 +3,6 @@ package uk.co.planetcom.infrastructure.ota.server.observers.api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
-import uk.co.planetcom.infrastructure.ota.server.controllers.webhooks.github.cosmo_codios.CosmoCoDiOSWebhookController;
-import uk.co.planetcom.infrastructure.ota.server.domain.Asset;
 import uk.co.planetcom.infrastructure.ota.server.observers.events.AssetDeviceNotifyEvent;
 import uk.co.planetcom.infrastructure.ota.server.observers.events.BaseEvent;
 import uk.co.planetcom.infrastructure.ota.server.observers.events.GitHubEvent;

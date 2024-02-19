@@ -1,4 +1,4 @@
-package uk.co.planetcom.infrastructure.ota.server.domain;
+package uk.co.planetcom.infrastructure.ota.server.db.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -9,20 +9,17 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
 import uk.co.planetcom.infrastructure.ota.server.db.converters.*;
+import uk.co.planetcom.infrastructure.ota.server.db.entities.embeddables.AssetCompat;
+import uk.co.planetcom.infrastructure.ota.server.db.entities.embeddables.AssetProduct;
 import uk.co.planetcom.infrastructure.ota.server.enums.*;
 import uk.co.planetcom.infrastructure.ota.server.utils.UrlUtils;
 
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URI;
-import java.sql.Timestamp;
 import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Data

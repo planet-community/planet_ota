@@ -4,17 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.Hidden;
-import jakarta.persistence.Transient;
 import lombok.Data;
+import uk.co.planetcom.infrastructure.ota.server.db.entities.Asset;
+import uk.co.planetcom.infrastructure.ota.server.db.entities.embeddables.AssetCompat;
+import uk.co.planetcom.infrastructure.ota.server.db.entities.embeddables.AssetProduct;
 import uk.co.planetcom.infrastructure.ota.server.enums.*;
 
 import java.io.Serializable;
 import java.net.URI;
 import java.time.OffsetDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
