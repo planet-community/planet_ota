@@ -1,6 +1,5 @@
 package uk.co.planetcom.infrastructure.ota.server.controllers.v1.webhooks.planet_git;
 
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +19,9 @@ public abstract class BasePlanetGitWebhookAbstractClass {
     protected abstract void dispatch();
 
     public abstract ResponseEntity<Map<String, ?>> receiveWebhook(@RequestHeader("X-Signature") String sig, @RequestBody String payload);
+
     protected ResponseEntity<Map<String, ?>> doReceiveWebhook(String sig,
-                                                   String payload) {
+                                                              String payload) {
         // TODO: Validate signature.
 
         // Dispatch to handler.

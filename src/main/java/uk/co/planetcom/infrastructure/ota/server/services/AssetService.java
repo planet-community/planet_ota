@@ -1,12 +1,11 @@
 package uk.co.planetcom.infrastructure.ota.server.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import lombok.extern.slf4j.Slf4j;
 import uk.co.planetcom.infrastructure.ota.server.db.AssetRepository;
 import uk.co.planetcom.infrastructure.ota.server.db.entities.Asset;
-import uk.co.planetcom.infrastructure.ota.server.enums.*;
+import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendorEnum;
 import uk.co.planetcom.infrastructure.ota.server.observers.api.EventSender;
 import uk.co.planetcom.infrastructure.ota.server.observers.events.AssetDeviceNotifyEvent;
 import uk.co.planetcom.infrastructure.ota.server.utils.UrlUtils;

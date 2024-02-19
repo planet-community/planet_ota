@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import uk.co.planetcom.infrastructure.ota.server.domain.AssetVO;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendorEnum;
 import uk.co.planetcom.infrastructure.ota.server.services.AssetService;
@@ -30,7 +33,7 @@ public final class ApparatusAssetController {
     @Autowired
     private AssetService assetService;
 
-    private Bucket bucket;
+    private final Bucket bucket;
 
     public ApparatusAssetController() {
         Bandwidth limit = Bandwidth.classic(20, Refill.greedy(20, Duration.ofMinutes(1)));

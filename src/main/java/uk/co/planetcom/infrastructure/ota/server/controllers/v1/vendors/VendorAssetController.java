@@ -18,8 +18,7 @@ public final class VendorAssetController {
     /* should be auth'd */
     @DeleteMapping(value = "/by/uuid/{uuid}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> deleteAssetByUuid(@PathVariable final UUID uuid,
-                                                    @RequestHeader final String authToken)
-    {
+                                                    @RequestHeader final String authToken) {
         try {
             assetService.delete(assetService.findByUuid(uuid).orElseThrow());
         } catch (NoSuchElementException e) {

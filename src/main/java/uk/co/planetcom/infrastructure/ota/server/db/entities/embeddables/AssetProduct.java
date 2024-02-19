@@ -25,8 +25,8 @@ public final class AssetProduct {
     private AssetProductEnum product;
 
     @ElementCollection
-    @MapKeyColumn(name="product_quirk_enum")
-    @Column(name="product_quirk_enablement")
+    @MapKeyColumn(name = "product_quirk_enum")
+    @Column(name = "product_quirk_enablement")
     private Map<AssetProductQuirkEnum, Boolean> productQuirkMap;
 
     @Convert(converter = AssetOSEnumConverter.class)

@@ -7,6 +7,7 @@ import java.time.ZonedDateTime;
 public class BaseEvent extends ApplicationEvent {
     protected ZonedDateTime timestamp = ZonedDateTime.now();
     protected Boolean internal = false; // False if publicly announced.
+
     public BaseEvent(Object source) {
         super(source);
     }

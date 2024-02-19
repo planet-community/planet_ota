@@ -21,16 +21,16 @@ public abstract class BaseGitHubWebhookAbstractClass {
     @Autowired
     protected EventSender eventSender;
 
-    private int SIG_LEN = 45;
+    private final int SIG_LEN = 45;
 
-    private String WEBHOOK_SECRET = "";
+    private final String WEBHOOK_SECRET = "";
 
     protected abstract void dispatch(String GH_USER_REPO);
 
     public abstract ResponseEntity<Map<String, ?>> receiveWebhook(@RequestHeader("X-Hub-Signature") String sig, @RequestBody String payload);
 
     protected ResponseEntity<Map<String, ?>> doReceiveWebhook(String sig,
-                                                   String payload) {
+                                                              String payload) {
         log.info("GitHub webhook: Received new webhook request.");
         try {
             log.debug("Computing GitHub SHA-1 hash..");

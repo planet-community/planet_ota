@@ -18,10 +18,11 @@ public final class ObserverDispatch implements ApplicationListener<BaseEvent> {
     @Override
     public void onApplicationEvent(final BaseEvent evt) {
         executorService.submit(() -> {
-            log.debug("Dispatching event: {}", evt.toString());
+            log.debug("Dispatching event: {}", evt);
             if (evt instanceof GitHubEvent) {
                 handleGitHubEvent((GitHubEvent) evt);
-            } if (evt instanceof AssetDeviceNotifyEvent) {
+            }
+            if (evt instanceof AssetDeviceNotifyEvent) {
                 handleAssetDeviceNotifyEvent((AssetDeviceNotifyEvent) evt);
             }
         });

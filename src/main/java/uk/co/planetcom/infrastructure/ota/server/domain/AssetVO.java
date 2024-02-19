@@ -8,7 +8,7 @@ import lombok.Data;
 import uk.co.planetcom.infrastructure.ota.server.db.entities.Asset;
 import uk.co.planetcom.infrastructure.ota.server.db.entities.embeddables.AssetCompat;
 import uk.co.planetcom.infrastructure.ota.server.db.entities.embeddables.AssetProduct;
-import uk.co.planetcom.infrastructure.ota.server.enums.*;
+import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendorEnum;
 
 import java.io.Serializable;
 import java.net.URI;

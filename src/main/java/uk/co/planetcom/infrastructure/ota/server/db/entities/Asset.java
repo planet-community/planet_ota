@@ -9,10 +9,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import uk.co.planetcom.infrastructure.ota.server.db.converters.*;
+import uk.co.planetcom.infrastructure.ota.server.db.converters.AssetVendorEnumConverter;
 import uk.co.planetcom.infrastructure.ota.server.db.entities.embeddables.AssetCompat;
 import uk.co.planetcom.infrastructure.ota.server.db.entities.embeddables.AssetProduct;
-import uk.co.planetcom.infrastructure.ota.server.enums.*;
+import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendorEnum;
 import uk.co.planetcom.infrastructure.ota.server.utils.UrlUtils;
 
 import java.io.Serializable;

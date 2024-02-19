@@ -8,14 +8,16 @@ import uk.co.planetcom.infrastructure.ota.server.enums.AssetProductEnum;
 public final class AssetProductEnumConverter implements AttributeConverter<AssetProductEnum, String> {
     @Override
     public String convertToDatabaseColumn(final AssetProductEnum AssetProductEnum) {
-        if (AssetProductEnum == null) throw new IllegalArgumentException("Cannot convert to DB column; `AssetProduct` argument is null.");
+        if (AssetProductEnum == null)
+            throw new IllegalArgumentException("Cannot convert to DB column; `AssetProduct` argument is null.");
 
         return AssetProductEnum.toString();
     }
 
     @Override
     public AssetProductEnum convertToEntityAttribute(final String s) {
-        if (s == null || s.isEmpty()) throw new IllegalArgumentException("Cannot convert to Entity; String argument (`AssetProduct`) is null.");
+        if (s == null || s.isEmpty())
+            throw new IllegalArgumentException("Cannot convert to Entity; String argument (`AssetProduct`) is null.");
 
         return AssetProductEnum.valueOf(s);
     }
