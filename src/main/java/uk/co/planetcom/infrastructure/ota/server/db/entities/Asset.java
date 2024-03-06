@@ -43,6 +43,8 @@ public final class Asset extends AbstractEntity implements Serializable {
 
     @NotNull
     @NotBlank
+    @JsonIgnore
+    @Hidden
     @Column(nullable = false)
     private String assetFileName; /* String representation of the filename that the object was uploaded as. */
 

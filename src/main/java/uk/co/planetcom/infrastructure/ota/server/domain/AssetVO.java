@@ -2,7 +2,6 @@ package uk.co.planetcom.infrastructure.ota.server.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.Data;
 import uk.co.planetcom.infrastructure.ota.server.db.entities.Asset;
@@ -33,8 +32,8 @@ public final class AssetVO implements Serializable {
 
     private String assetSha256Hash; /* SHA-256 hash of the asset, generate from bytes stored in RDBMS */
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) /* Restrict access from public API. */
     @Hidden
+    @JsonIgnore
     private OffsetDateTime releaseTimeStamp; /* When the asset is 'due' to be released to users. */
 
     private AssetProduct assetProduct;
@@ -48,6 +47,7 @@ public final class AssetVO implements Serializable {
     private boolean assetSuppressed; /* Whenever the asset has been suppressed, for whatever reason. */
 
     @JsonIgnore
+    @Hidden
     private OffsetDateTime uploadTimeStamp;
 
     public AssetVO(final Asset o) {
