@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uk.co.planetcom.infrastructure.ota.server.controllers.v1.webhooks.github.BaseGitHubWebhookAbstractClass;
-import uk.co.planetcom.infrastructure.ota.server.observers.events.GitHubEvent;
+import uk.co.planetcom.infrastructure.ota.server.controllers.v1.webhooks.github.BaseGitHubAbstractWebhook;
+import uk.co.planetcom.infrastructure.ota.server.utils.observer.events.GitHubEvent;
 
 import java.util.Map;
 
@@ -20,7 +20,7 @@ import java.util.Map;
 @Hidden
 @RequestMapping("/api/v1/webhooks/github/cosmo-codios")
 @Tag(name = "Cosmo-CoDiOS webhook controller", description = "Handles Cosmo-CoDiOS GitHub org webhooks")
-public final class CosmoCoDiOSWebhookController extends BaseGitHubWebhookAbstractClass {
+public final class CodiOSWebhookControllerGitHubAbstractWebhook extends BaseGitHubAbstractWebhook {
 
     @Value("${github.webhooks.secrets.codid}")
     private String WEBHOOK_SECRET;

@@ -9,21 +9,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
-import uk.co.planetcom.infrastructure.ota.server.observers.api.EventSender;
+import uk.co.planetcom.infrastructure.ota.server.utils.observer.api.EventSender;
 
 import java.security.MessageDigest;
 import java.util.Collections;
 import java.util.Map;
 
-public abstract class BaseGitHubWebhookAbstractClass {
+public abstract class BaseGitHubAbstractWebhook {
     protected final Logger log = LoggerFactory.getLogger(getClass());
-
+    private final int SIG_LEN = 45;
+    private final String WEBHOOK_SECRET = "";
     @Autowired
     protected EventSender eventSender;
-
-    private final int SIG_LEN = 45;
-
-    private final String WEBHOOK_SECRET = "";
 
     protected abstract void dispatch(String GH_USER_REPO);
 

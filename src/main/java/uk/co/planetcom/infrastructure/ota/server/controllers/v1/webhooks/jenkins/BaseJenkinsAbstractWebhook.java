@@ -1,4 +1,4 @@
-package uk.co.planetcom.infrastructure.ota.server.controllers.v1.webhooks.planet_git;
+package uk.co.planetcom.infrastructure.ota.server.controllers.v1.webhooks.jenkins;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.Map;
 
-public abstract class BasePlanetGitWebhookAbstractClass {
-
+public abstract class BaseJenkinsAbstractWebhook {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     private final int SIG_LEN = 45;
