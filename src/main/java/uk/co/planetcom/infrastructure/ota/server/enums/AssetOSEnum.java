@@ -5,6 +5,8 @@ public enum AssetOSEnum {
     UBUNTU,
     ANDROID,
     NIXOS,
+    CODI_STOCK,
+    CODI_COSMO_CODIOS,
     SAILFISH,
     POSTMARKETOS,
     DROIDIAN,
