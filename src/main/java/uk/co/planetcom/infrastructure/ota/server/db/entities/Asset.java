@@ -26,13 +26,14 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@EqualsAndHashCode(callSuper = false)
 @Builder
 @Entity(name = "Asset")
 @EntityListeners(AssetEntityListener.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "assets")
 // TODO: Javadoc and OpenAPI doc this class.
-public final class Asset implements Serializable {
+public final class Asset extends AbstractEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @NotNull
