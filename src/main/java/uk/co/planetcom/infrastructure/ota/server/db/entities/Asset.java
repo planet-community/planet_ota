@@ -31,7 +31,7 @@ import java.util.UUID;
 @Entity(name = "Asset")
 @EntityListeners(AssetEntityListener.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Table(name = "assets")
+@Table(name = "Assets")
 // TODO: Javadoc and OpenAPI doc this class.
 public final class Asset extends AbstractEntity implements Serializable {
     @Id
