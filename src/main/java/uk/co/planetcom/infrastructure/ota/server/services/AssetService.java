@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 import uk.co.planetcom.infrastructure.ota.server.db.AssetRepository;
 import uk.co.planetcom.infrastructure.ota.server.db.entities.Asset;
 import uk.co.planetcom.infrastructure.ota.server.enums.AssetVendorEnum;
-import uk.co.planetcom.infrastructure.ota.server.observers.api.EventSender;
-import uk.co.planetcom.infrastructure.ota.server.observers.events.AssetDeviceNotifyEvent;
 import uk.co.planetcom.infrastructure.ota.server.utils.UrlUtils;
 
 import java.net.MalformedURLException;
@@ -23,9 +21,6 @@ public final class AssetService {
     @Autowired
     private AssetRepository repository;
 
-    @Autowired
-    private EventSender eventSender;
-
     public Asset create(final Asset entity) throws MalformedURLException {
         entity.setAssetFileName(UrlUtils.getUrlFileName(entity.getAssetDownloadUri().toString()));
         return repository.saveAndFlush(entity);
@@ -39,15 +34,8 @@ public final class AssetService {
         Asset asset = repository.findById(id)
             .orElseThrow(); // FIXME: handle safely.
         asset.setReleaseTimeStamp(newReleaseTimestamp);
-        // Send out notification if Asset is *now* available.
-        if (asset.isAvailable()) notifyDevices(asset);
+        // Class `AssetEntityListener` will handle the notification.
         repository.saveAndFlush(asset);
-    }
-
-    private void notifyDevices(final Asset o) {
-        log.info("Asset updated, and now available. Notifying Observers.");
-        AssetDeviceNotifyEvent evt = new AssetDeviceNotifyEvent(this, o);
-        eventSender.sendEvent(evt);
     }
 
     public void suppressAsset(final UUID id) {
@@ -61,10 +49,9 @@ public final class AssetService {
     private void modifySuppressed(final UUID id, final boolean suppression) {
         Asset asset = repository.findById(id)
             .orElseThrow(); // FIXME: handle safely.
-        // Send out notification if Asset is *now* available.
         asset.setAssetSuppressed(suppression);
 
-        if (asset.isAvailable()) notifyDevices(asset);
+        // Class `AssetEntityListener` will handle the notification.
         repository.saveAndFlush(asset);
     }
 

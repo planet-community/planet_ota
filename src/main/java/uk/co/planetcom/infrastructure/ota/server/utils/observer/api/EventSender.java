@@ -1,9 +1,9 @@
-package uk.co.planetcom.infrastructure.ota.server.observers.api;
+package uk.co.planetcom.infrastructure.ota.server.utils.observer.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
-import uk.co.planetcom.infrastructure.ota.server.observers.events.BaseEvent;
+import uk.co.planetcom.infrastructure.ota.server.utils.observer.events.BaseEvent;
 
 @Component
 public final class EventSender {

@@ -1,4 +1,4 @@
-package uk.co.planetcom.infrastructure.ota.server.observers.events;
+package uk.co.planetcom.infrastructure.ota.server.utils.observer.events;
 
 import lombok.Getter;
 import uk.co.planetcom.infrastructure.ota.server.db.entities.Asset;

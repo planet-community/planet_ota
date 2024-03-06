@@ -28,6 +28,7 @@ import java.util.UUID;
 @ToString
 @Builder
 @Entity(name = "Asset")
+@EntityListeners(AssetEntityListener.class)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Table(name = "assets")
 // TODO: Javadoc and OpenAPI doc this class.
