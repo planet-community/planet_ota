@@ -16,14 +16,14 @@ jobs:
 
       - name: Build images
         id: build
-        uses: redhat-actions/buildah-build@v2.12
+        uses: redhat-actions/buildah-build@v2.13
         with:
           image: ${{ github.repository }}
           tags: ${{ github.ref_name }}
           containerfiles: Dockerfile
 
       - name: Push container to GHCR.io
-        uses: redhat-actions/push-to-registry@v2.7
+        uses: redhat-actions/push-to-registry@v2.8
         with:
           image: ${{ steps.build.outputs.image }}
           tags: ${{ steps.build.outputs.tags }}
