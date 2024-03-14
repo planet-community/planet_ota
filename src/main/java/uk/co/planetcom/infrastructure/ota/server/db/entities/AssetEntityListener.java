@@ -17,10 +17,9 @@ public class AssetEntityListener {
 
     @PostPersist
     @PostUpdate
-    @PostRemove
-    public void notifyAssetEvent(final Asset asset) {
+    public final void notifyAssetEvent(final Asset o) {
         log.info("Asset updated, and now available. Notifying Observers.");
-        AssetDeviceNotifyEvent evt = new AssetDeviceNotifyEvent(this, asset);
+        AssetDeviceNotifyEvent evt = new AssetDeviceNotifyEvent(this, o);
         eventSender.sendEvent(evt);
     }
 
