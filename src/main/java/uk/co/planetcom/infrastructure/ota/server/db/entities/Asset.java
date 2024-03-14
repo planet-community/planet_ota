@@ -34,13 +34,6 @@ import java.util.UUID;
 @Table(name = "Assets")
 // TODO: Javadoc and OpenAPI doc this class.
 public final class Asset extends AbstractEntity implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @NotNull
-    @Column(nullable = false, name = "id")
-    @Setter(AccessLevel.NONE)
-    private UUID assetId; /* UUID/GUID to avoid column collision */
-
     @NotNull
     @NotBlank
     @JsonIgnore

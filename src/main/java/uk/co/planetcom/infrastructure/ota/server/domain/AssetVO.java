@@ -18,7 +18,7 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 public final class AssetVO implements Serializable {
-    private UUID assetId; /* UUID/GUID to avoid column collision */
+    private UUID id; /* UUID/GUID to avoid column collision */
 
     private String assetFileName; /* String representation of the filename that the object was uploaded as. */
 
@@ -51,7 +51,7 @@ public final class AssetVO implements Serializable {
     private OffsetDateTime uploadTimeStamp;
 
     public AssetVO(final Asset o) {
-        this.setAssetId(o.getAssetId());
+        this.setId(o.getId());
         this.setAssetFileName(o.getAssetFileName());
         this.setAssetVendor(o.getAssetVendor());
         this.setAssetVersion(o.getAssetVersion());
