@@ -16,7 +16,7 @@ services:
   planet_ota:
     build:
       context: .
-    image: "ghcr.io/shymega/planet_ota:latest"
+    image: "ghcr.io/planet-community/planet_ota:latest"
     hostname: "planet_ota"
     container_name: "planet_ota"
     restart: on-failure
