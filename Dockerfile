@@ -1,4 +1,4 @@
-FROM docker.io/maven:3.8-eclipse-temurin-17 AS build
+FROM docker.io/maven:3.8-eclipse-temurin-21 AS build
 
 WORKDIR /home/app
 COPY . ./
@@ -6,7 +6,7 @@ COPY . ./
 RUN git submodule update --init --recursive \
     && mvn -DskipTests clean package
 
-FROM docker.io/eclipse-temurin:17-jre AS app
+FROM docker.io/eclipse-temurin:21-jre AS app
 
 ARG OTA_VERSION=0.1.0
 
