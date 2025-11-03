@@ -40,7 +40,7 @@
             <dependency>
                 <groupId>software.amazon.awssdk</groupId>
                 <artifactId>bom</artifactId>
-                <version>2.36.2</version>
+                <version>2.37.3</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -161,12 +161,12 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
-            <version>2.20.0</version>
+            <version>2.20.1</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.20.0</version>
+            <version>2.20.1</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -176,20 +176,20 @@
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>2.20.0</version>
+            <version>2.20.1</version>
         </dependency>
 
         <!-- TDD/testing libraries -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>6.0.0</version>
+            <version>6.0.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>6.0.0</version>
+            <version>6.0.1</version>
             <scope>test</scope>
         </dependency>
 
@@ -267,18 +267,18 @@
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>rds</artifactId>
-            <version>2.36.2</version>
+            <version>2.37.3</version>
         </dependency>
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>s3</artifactId>
-            <version>2.36.2</version>
+            <version>2.37.3</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>sqs</artifactId>
-            <version>2.36.2</version>
+            <version>2.37.3</version>
         </dependency>
     </dependencies>
     <build>
